@@ -1,10 +1,9 @@
 import axios from "axios";
 
-export const callEnvironmentData = async (region = "%EC%84%9C%EC%9A%B8") => {
+export const callEnvironmentData = async (region = "전국") => {
   try {
     return await axios
-
-      .get(`/api/pageNo=1&sidoName=${region}&ver=1.0`)
+      .get(`/api/pageNo=1&sidoName=${encodeURI(region)}&ver=1.0`)
       .then((res) => {
         return res;
       })

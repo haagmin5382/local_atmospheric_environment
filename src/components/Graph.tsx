@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useEffect } from "react";
 import { callEnvironmentData } from "../utils/index";
 import { useDispatch, useSelector } from "react-redux";
 import { setInfo } from "../redux/index";
@@ -27,7 +26,7 @@ const Graph = () => {
               <br /> 초미세먼지 : {obj.pm25Value}
             </li>
           );
-        })}
+        }) ?? "데이터를 불러오는 중... "}
       </ol>
     </div>
   );
