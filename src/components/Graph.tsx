@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { callEnvironmentData } from "../utils/index";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setInfo } from "../redux/index";
 const Graph = () => {
-  const [regionInfo, setRegionInfo] = useState<any>([]);
+  const data = useSelector(
+    (state: any) => state.info.value.data?.response.body.items
+  );
+  const dispatch = useDispatch();
+
+  console.log("데아터", data);
 
   useEffect(() => {
-    callEnvironmentData()?.then((data: any) => {
-      console.log(data);
-      setRegionInfo(data?.data.response.body.items);
-    });
+    callEnvironmentData().then((data: any) => dispatch(setInfo(data)));
   }, []);
-  console.log(regionInfo);
   return (
     <div>
       <span>시작</span>
       <ol>
-        {regionInfo.map((obj: any, idx: number) => {
+        {data?.map((obj: any, idx: number) => {
           return (
             <li key={idx}>
               {obj.sidoName} {obj.stationName}

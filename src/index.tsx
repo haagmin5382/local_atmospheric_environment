@@ -4,49 +4,26 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { PersistGate } from "redux-persist/integration/react";
-import { configureStore } from "@reduxjs/toolkit";
-import getDataFromAPI from "./redux/index";
-const persistConfig = {
-  key: "root",
-  version: 1,
-  storage,
-};
 
-const persistedReducer = persistReducer(persistConfig, getDataFromAPI);
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import getDataFromAPI from "./redux/index";
 
 const store: any = configureStore({
   reducer: {
-    info: persistedReducer,
+    info: getDataFromAPI,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }),
 });
-let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <App />
-    </PersistGate>
+    <App />
   </Provider>
 );
 
