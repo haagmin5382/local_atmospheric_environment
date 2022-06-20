@@ -8,18 +8,19 @@ interface ModalProps {
 const ModalContainer = styled.div<ModalProps>`
   position: absolute;
   top: ${(props) => props.mouseLocation[1]}px;
-  left: ${(props) => props.mouseLocation[0] + 30}px;
+  left: ${(props) => props.mouseLocation[0]}px;
   background-color: #ffffff;
   color: #959794;
-  width: 20vw;
-  height: 10vh;
+  width: 3vw;
+  height: 5vh;
   border: 1px solid #505649;
   border-radius: 20px;
   text-align: center;
-  line-height: 10vh;
+  line-height: 5vh;
   font-weight: bold;
+  pointer-events: none;
 `;
-const Modal = ({ ModlaRegion, mouseLocation, moveMouse }: any) => {
+const Modal = ({ ModlaRegion, mouseLocation }: any) => {
   return (
     <ModalContainer mouseLocation={mouseLocation}>{ModlaRegion}</ModalContainer>
   );
