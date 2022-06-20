@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { callEnvironmentData } from "../utils/index";
 import { useDispatch, useSelector } from "react-redux";
-import { setInfo } from "../redux/index";
+import LoadingSpinner from "./LoadingSpinner";
 const Graph = () => {
   const data = useSelector(
     (state: any) => state.info.value.data?.response.body.items
@@ -10,12 +8,8 @@ const Graph = () => {
 
   console.log("데아터", data);
 
-  useEffect(() => {
-    callEnvironmentData().then((data: any) => dispatch(setInfo(data)));
-  }, []);
   return (
     <div>
-      <span>시작</span>
       <ol>
         {data?.map((obj: any, idx: number) => {
           return (
@@ -26,7 +20,7 @@ const Graph = () => {
               <br /> 초미세먼지 : {obj.pm25Value}
             </li>
           );
-        }) ?? "데이터를 불러오는 중... "}
+        }) ?? <LoadingSpinner />}
       </ol>
     </div>
   );
