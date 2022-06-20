@@ -2,6 +2,7 @@ import "./App.css";
 import Main from "pages/Main";
 import { BrowserRouter } from "react-router-dom";
 import LoadingSpinner from "components/LoadingSpinner";
+import Footer from "components/Footer";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Main />
       </BrowserRouter>
       {/* <LoadingSpinner /> */}
+      <Footer />
     </div>
   );
 }

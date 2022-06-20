@@ -6,7 +6,7 @@ import { setInfo } from "../redux/index";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 const SvgContainer = styled.svg`
-  height: 80vh;
+  height: 70vh;
   width: 100vw;
 `;
 
