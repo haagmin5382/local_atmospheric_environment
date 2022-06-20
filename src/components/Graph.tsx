@@ -97,6 +97,10 @@ const Graph = () => {
   return (
     <div>
       <h2>
+        시각 :{" "}
+        {filteredData ? filteredData[0]?.dataTime : "데이터를 불러오는 중..."}
+      </h2>
+      <h2>
         {filteredData ? filteredData[0]?.sidoName : null} 지역 평균 미세먼지 :{" "}
         {filteredData
           ? getAverageParticle("pm10Value")

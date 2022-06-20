@@ -19,6 +19,7 @@ const ModalContainer = styled.div<ModalProps>`
   line-height: 5vh;
   font-weight: bold;
   pointer-events: none;
+  transition: 0.1s;
 `;
 const Modal = ({ ModlaRegion, mouseLocation }: any) => {
   return (
