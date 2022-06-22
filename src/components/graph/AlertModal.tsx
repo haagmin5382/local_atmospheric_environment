@@ -41,7 +41,7 @@ const AlertModal = () => {
 
   return (
     <AlertModalContainer>
-      <AlertMessage>데이터를 로드하는데 시간이 너무 오래걸립니다 </AlertMessage>
+      <AlertMessage>데이터를 로드하지 못했습니다</AlertMessage>
       <AlertMessage>다시 시도해주세요 </AlertMessage>
       <AlertMessage>
         <button onClick={() => navigate("/")}>돌아가기</button>
