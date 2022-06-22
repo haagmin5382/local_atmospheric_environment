@@ -1,4 +1,4 @@
-import Graph from "components/Graph";
+import Graph from "components/graph/Graph";
 import Header from "components/Header";
 import KoreaMap from "components/KoreaMap";
 import RegionButton from "components/RegionButton";

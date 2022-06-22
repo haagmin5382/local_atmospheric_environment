@@ -29,7 +29,6 @@ const RegionButton = () => {
 
   const changeRegion = (e: React.MouseEvent<HTMLButtonElement>) => {
     const eventTarget = e.target as HTMLElement;
-    console.log(eventTarget.innerText);
     dispatch(setInfo("")); // loading indicator 띄우기
     callEnvironmentData(eventTarget.innerText).then((data: any) =>
       dispatch(setInfo(data))

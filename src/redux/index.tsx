@@ -13,4 +13,5 @@ export const getDataFromAPI = createSlice({
 });
 
 export const { setInfo } = getDataFromAPI.actions;
+
 export default getDataFromAPI.reducer;

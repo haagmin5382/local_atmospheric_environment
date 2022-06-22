@@ -7,9 +7,9 @@ const Title = styled.h1`
 
 const Header = () => {
   return (
-    <div>
+    <>
       <Title>지역별 미세먼치 수치</Title>
-    </div>
+    </>
   );
 };
 

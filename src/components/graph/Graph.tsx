@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -94,6 +95,12 @@ const Graph = () => {
     ],
   };
 
+  useEffect(() => {
+    window.onbeforeunload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+  }, []);
   return (
     <div>
       <h2>

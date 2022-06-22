@@ -1,7 +1,7 @@
 import "./App.css";
 import Main from "pages/Main";
 import { BrowserRouter } from "react-router-dom";
-import LoadingSpinner from "components/LoadingSpinner";
+import LoadingSpinner from "components/graph/LoadingSpinner";
 import Footer from "components/Footer";
 
 function App() {
