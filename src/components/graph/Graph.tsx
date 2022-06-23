@@ -26,7 +26,7 @@ ChartJS.register(
 const Graph = () => {
   // redux api데이터
   const environment = useSelector(
-    (state: any) => state.info.value.data?.response?.body.items
+    (state: any) => state.info.value?.data?.response?.body.items
   );
 
   // 값이 측정되지 않은 것들을 filter
