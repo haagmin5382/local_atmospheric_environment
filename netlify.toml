@@ -1,0 +1,11 @@
+
+
+[[redirects]]
+  from = "/api/*"
+  to = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${process.env.REACT_APP_ACCESS_TOKEN}&returnType=json&numOfRows=100&`
+  status = 200
+
+  [[redirects]]
+  from = "/*"
+  to ="/index.html"
+  status = 200
