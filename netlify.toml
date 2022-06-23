@@ -2,7 +2,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=process.env.REACT_APP_ACCESS_TOKEN&returnType=json&numOfRows=100&/:splat`
+  to = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc//:splat`
   status = 200
 
 [[redirects]]

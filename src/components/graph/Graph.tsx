@@ -28,6 +28,11 @@ const Graph = () => {
   const environment = useSelector(
     (state: any) => state.info.value.data?.response?.body.items
   );
+  console.log(
+    useSelector((state: any) => {
+      return state.info.value.data;
+    })
+  );
 
   // 값이 측정되지 않은 것들을 filter
   const filteredData = environment?.filter((obj: any) => {
