@@ -8,13 +8,17 @@ export const callEnvironmentData = async (region = "전국") => {
           process.env.REACT_APP_ACCESS_TOKEN
         }&returnType=json&numOfRows=100&pageNo=1&sidoName=${encodeURI(
           region
-        )}&ver=1.0`
+        )}&ver=1.0`,
+        { withCredentials: true },
+        {
+          headers: { Accept: "*/*", "Content-Type": `application/json` },
+        }
       )
       .then((res) => {
         return res;
       })
       .catch((error) => {
-        console.log("catch error");
+        console.log("catch error", error.response.data);
       });
   } catch {
     console.log("에러발생");
