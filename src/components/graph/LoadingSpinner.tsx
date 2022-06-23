@@ -4,9 +4,7 @@ import AlertModal from "./AlertModal";
 
 const LoadingSpinnerContainer = styled.div`
   width: 100%;
-  height: 100%;
-  position: absolute;
-
+  height: 52vh;
   top: 0;
   left: 0;
 

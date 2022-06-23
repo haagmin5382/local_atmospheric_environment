@@ -7,7 +7,9 @@ export const callEnvironmentData = async (region = "전국") => {
       .then((res) => {
         return res;
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log("catch error", error);
+      });
   } catch {
     console.log("에러발생");
   }

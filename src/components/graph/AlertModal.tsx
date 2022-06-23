@@ -20,14 +20,15 @@ const AlertMessage = styled.div`
   font-weight: bold;
   margin-top: 3vh;
   font-size: 1rem;
+  color: #e14e23;
   /* line-height: 5vh; */
 
   > button {
     padding: 20px;
     border: 1px solid #ffd67f;
     border-radius: 10px;
-    width: 10vw;
-    height: 10vh;
+    width: 20vw;
+    height: 8vh;
     background-color: #e14e23;
     color: #ffffff;
     font-size: 1em;
