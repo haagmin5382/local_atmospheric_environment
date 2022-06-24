@@ -56,9 +56,10 @@ const KoreaMap = () => {
   const [ModlaRegion, setModalRegion] = useState("");
 
   // 온마우스 이벤트
-  const putMouse = (e: any) => {
+  const putMouse = (e: React.MouseEvent<SVGPathElement>) => {
+    const target = (e.target as Element).id;
     setModalOpen(true);
-    setModalRegion(regions[e.target.id]);
+    setModalRegion(regions[target]);
   };
 
   // 마우스 아웃 이벤트
@@ -71,9 +72,9 @@ const KoreaMap = () => {
     const target = (e.target as Element).id;
 
     dispatch(setInfo("")); // loading indicator 띄우기
-    callEnvironmentData(regions[target]).then((data: any) =>
-      dispatch(setInfo(data))
-    );
+    callEnvironmentData(regions[target]).then((data: any) => {
+      dispatch(setInfo(data));
+    });
     navigate("/graph");
   };
 
@@ -84,7 +85,7 @@ const KoreaMap = () => {
   const [mouseLocation, setMouseLocation] = useState([0, 0]);
 
   // 마우스 움직임 이벤트
-  const moveMouse = (e: any) => {
+  const moveMouse = (e: React.MouseEvent<SVGPathElement>) => {
     if (throttle) {
       return; // throttle이 true면 함수 종료
     } else {

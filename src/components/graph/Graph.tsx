@@ -23,14 +23,37 @@ ChartJS.register(
   Legend
 );
 
+type EnvironmentData = {
+  info: {
+    value: {
+      data: {
+        response: {
+          body: {
+            items: Array<ItemsData>;
+          };
+        };
+      };
+    };
+  };
+};
+
+interface ItemsData {
+  dataTime: string;
+  sidoName: string;
+  stationName: string;
+  pm10Value: string;
+  pm25Value: string;
+}
+
 const Graph = () => {
   // redux api데이터
-  const environment = useSelector(
-    (state: any) => state.info.value?.data?.response?.body.items
-  );
+
+  const environment = useSelector((state: EnvironmentData) => {
+    return state.info.value?.data?.response?.body.items;
+  });
 
   // 값이 측정되지 않은 것들을 filter
-  const filteredData = environment?.filter((obj: any) => {
+  const filteredData = environment?.filter((obj: ItemsData) => {
     return (
       obj.pm10Value !== "-" &&
       obj.pm25Value !== "-" &&
@@ -42,8 +65,10 @@ const Graph = () => {
   // 평균값 내는 함수
   const getAverageParticle = (value: string) => {
     return Math.floor(
-      filteredData?.reduce((acc: any, cur: any) => {
-        acc = acc + Number(cur?.[value]);
+      filteredData?.reduce((acc: number, cur: ItemsData) => {
+        if (value === "pm10Value" || value === "pm25Value") {
+          acc = acc + Number(cur?.[value]);
+        }
         return acc;
       }, 0) / filteredData?.length
     );
@@ -65,15 +90,15 @@ const Graph = () => {
     },
   };
 
-  const labels = filteredData?.map((obj: any) => {
+  const labels = filteredData?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
 
-  const fineDust = filteredData?.map((obj: any) => {
+  const fineDust = filteredData?.map((obj: ItemsData) => {
     return obj.pm10Value;
   });
 
-  const ultraFineDust = filteredData?.map((obj: any) => {
+  const ultraFineDust = filteredData?.map((obj: ItemsData) => {
     return obj.pm25Value;
   });
 

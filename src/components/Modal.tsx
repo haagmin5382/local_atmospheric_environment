@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface ModalProps {
-  mouseLocation: any;
+  mouseLocation: Array<number>;
 }
 
 const ModalContainer = styled.div<ModalProps>`
@@ -21,7 +21,14 @@ const ModalContainer = styled.div<ModalProps>`
   pointer-events: none;
   transition: 0.1s;
 `;
-const Modal = ({ ModlaRegion, mouseLocation }: any) => {
+
+const Modal = ({
+  ModlaRegion,
+  mouseLocation,
+}: {
+  ModlaRegion: string;
+  mouseLocation: Array<number>;
+}) => {
   return (
     <ModalContainer mouseLocation={mouseLocation}>{ModlaRegion}</ModalContainer>
   );
