@@ -13,7 +13,7 @@ const Source = styled.div`
 const Footer = () => {
   return (
     <footer>
-      <Source>출처 : 에어코리아 대기오염정보</Source>
+      <Source>출처 : 한국환경공단 에어코리아 대기오염정보</Source>
     </footer>
   );
 };

@@ -1,70 +1,16 @@
-# Getting Started with Create React App
+# 지역별 미세먼지 수치 그래프
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+한국환경공단 에어코리아에서 제공하는 공공데이터 API를 활용한 지역별 미세먼치 수치를 그래프로 나타는 웹사이트
 
-## Available Scripts
+## svg로 그린 지도
 
-In the project directory, you can run:
+svg로 지도를 그렸고 해당하는 지역에 마우스를 올려놓으면 그 지역의 색깔이 변하면서 그래프로 보여줄 지역을 모달로 띄웁니다. throttle 기능을 적용해서 마우스를 움직일 때마다 마우스 위치를 따라서 모달이 움직이는게 아니라 움직인 후 0.2초 뒤에 모달이 나오게끔 적용했습니다.
 
-### `npm start`
+## 지역별 미세먼치 그래프
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+API로 받아오는 데이터는 redux-toolkit으로 관리했으며, 받아온 데이터는 react-chart-js2 라이브러리를 사용해서 미세먼치 수치를 차트로 나타내었습니다.
+평균 미세먼지 수치와 초미세먼지 수치 또한 나타내주어서 어떤 지역이 평균보다 높고 낮은지 확인할 수 있습니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### LoadingSpinner
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+loading-spinner를 적용해서 데이터를 불러오는데 시간이 걸린다면 로딩 중 표시를 띄워서 오류가 발생한게 아니게끔 표시했습니다. 가끔 데이터를 받아오는데 시간이 오래걸리는 경우가 있는데 너무 시간이 오래걸리면 다시 API요청을 할 수 있도록 대기 시간이 2분이 넘어가면 뒤로 돌아가는 모달을 띄우도록 구현했습니다.
