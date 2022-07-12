@@ -119,7 +119,6 @@ const Graph = () => {
       },
     ],
   };
-
   useEffect(() => {
     window.onbeforeunload = (e) => {
       e.preventDefault();
