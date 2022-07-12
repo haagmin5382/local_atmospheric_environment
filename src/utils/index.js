@@ -18,6 +18,7 @@ export const callEnvironmentData = async (region = "전국") => {
         return res;
       })
       .catch((error) => {
+        console.log(error);
         console.log("catch error");
       });
   } catch {
