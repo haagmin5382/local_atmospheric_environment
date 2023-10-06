@@ -1,5 +1,8 @@
 # 지역별 미세먼지 수치 그래프
 
+![atmosphereParticleGraph](https://user-images.githubusercontent.com/81218474/187145057-a2680b47-c9aa-4372-80d4-e0b2030f21dd.gif)
+
+
 한국환경공단 에어코리아에서 제공하는 공공데이터 API를 활용한 지역별 미세먼치 수치를 그래프로 나타는 웹사이트
 
 ## svg로 그린 지도
