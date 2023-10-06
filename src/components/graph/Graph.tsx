@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../LoadingSpinner";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useEffect } from "react";
+import { ItemsData, getAverageParticle } from "utils/getAverage";
 
 ChartJS.register(
   CategoryScale,
@@ -37,14 +38,6 @@ type EnvironmentData = {
   };
 };
 
-interface ItemsData {
-  dataTime: string;
-  sidoName: string;
-  stationName: string;
-  pm10Value: string;
-  pm25Value: string;
-}
-
 const Graph = () => {
   // redux api데이터
 
@@ -61,18 +54,6 @@ const Graph = () => {
       obj.pm25Value !== null
     );
   });
-
-  // 평균값 내는 함수
-  const getAverageParticle = (value: string) => {
-    return Math.floor(
-      filteredData?.reduce((acc: number, cur: ItemsData) => {
-        if (value === "pm10Value" || value === "pm25Value") {
-          acc = acc + Number(cur?.[value]);
-        }
-        return acc;
-      }, 0) / filteredData?.length
-    );
-  };
 
   // 그래프 그리기
   const options = {
@@ -134,13 +115,13 @@ const Graph = () => {
       <h2>
         {filteredData ? filteredData[0]?.sidoName : null} 지역 평균 미세먼지 :{" "}
         {filteredData
-          ? getAverageParticle("pm10Value")
+          ? getAverageParticle(filteredData, "pm10Value")
           : " 데이터를 불러오는 중..."}
       </h2>
       <h2>
         {filteredData ? filteredData[0]?.sidoName : null} 지역 평균 초미세먼지 :
         {filteredData
-          ? getAverageParticle("pm25Value")
+          ? getAverageParticle(filteredData, "pm25Value")
           : " 데이터를 불러오는 중..."}{" "}
       </h2>
 

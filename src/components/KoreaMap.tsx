@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { callEnvironmentData } from "utils";
+import { callEnvironmentData } from "utils/api";
 import { setInfo } from "../redux/index";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
+import { regions } from "resource/region";
 
 const MapContainer = styled.section`
   margin-top: 2vh;
@@ -29,28 +30,6 @@ const PathContainer = styled.path`
 const KoreaMap = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  type regionsType = {
-    [index: string]: string;
-  };
-  const regions: regionsType = {
-    seoul: "서울",
-    busan: "부산",
-    daegu: "대구",
-    incheon: "인천",
-    gwangju: "광주",
-    daejeon: "대전",
-    ulsan: "울산",
-    gyeonggi: "경기",
-    gangwon: "강원",
-    northChungcheong: "충북",
-    southChungcheong: "충남",
-    northJeolla: "전북",
-    southJeolla: "전남",
-    northGyeongsang: "경북",
-    southGyeongsang: "경남",
-    jeju: "제주",
-    sejong: "세종",
-  };
 
   const [isModalOpened, setModalOpen] = useState(false);
   const [ModlaRegion, setModalRegion] = useState("");

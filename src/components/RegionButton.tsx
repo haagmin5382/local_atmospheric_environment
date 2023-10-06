@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setInfo } from "../redux/index";
-import { callEnvironmentData } from "utils";
+import { callEnvironmentData } from "utils/api";
 
 const regions = [
   "전국",
