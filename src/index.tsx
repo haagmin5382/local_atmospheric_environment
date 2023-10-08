@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 
 import { configureStore } from "@reduxjs/toolkit";
 import getDataFromAPI from "./redux/index";
+import { RecoilRoot } from "recoil";
 
 const store: any = configureStore({
   reducer: {
@@ -22,9 +23,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <RecoilRoot>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function

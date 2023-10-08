@@ -6,6 +6,8 @@ import { setInfo } from "../redux/index";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { regions } from "resource/region";
+import { atom, useRecoilState } from "recoil";
+import { environmentState } from "recoil/environment";
 
 const MapContainer = styled.section`
   margin-top: 2vh;
@@ -34,16 +36,19 @@ const KoreaMap = () => {
   const [isModalOpened, setModalOpen] = useState(false);
   const [ModlaRegion, setModalRegion] = useState("");
 
+  const [environmentValue, setEnvironmentValue] =
+    useRecoilState(environmentState);
+
   // 온마우스 이벤트
   const putMouse = (e: React.MouseEvent<SVGPathElement>) => {
     const target = (e.target as Element).id;
-    setModalOpen(true);
+    setModalOpen(true); // 지역 위치 알려 주는 모달 오픈
     setModalRegion(regions[target]);
   };
 
   // 마우스 아웃 이벤트
   const getOutMouse = () => {
-    setModalOpen(false);
+    setModalOpen(false); // 지역 위치 알려 주는 모달 클로즈
   };
 
   // 클릭 이벤트
@@ -53,6 +58,7 @@ const KoreaMap = () => {
     dispatch(setInfo("")); // loading indicator 띄우기
     callEnvironmentData(regions[target]).then((data: any) => {
       dispatch(setInfo(data));
+      setEnvironmentValue(data);
     });
     navigate("/graph");
   };
