@@ -13,6 +13,8 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useEffect } from "react";
 import { ItemsData, getAverageParticle } from "utils/getAverage";
+import { useRecoilValue } from "recoil";
+import { environmentState } from "recoil/environment";
 
 ChartJS.register(
   CategoryScale,
@@ -106,6 +108,10 @@ const Graph = () => {
       e.returnValue = "";
     };
   }, []);
+  const environmentValue = useRecoilValue(environmentState);
+
+  console.log(environmentValue);
+
   return (
     <div>
       <h2>
