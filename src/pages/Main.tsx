@@ -12,7 +12,7 @@ const Main = () => {
         <Route element={<KoreaMap />} path="/" />
         <Route element={<Graph />} path="/graph" />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

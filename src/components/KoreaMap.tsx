@@ -6,12 +6,12 @@ import { setInfo } from "../redux/index";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { regions } from "resource/region";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
 
 const MapContainer = styled.section`
-  margin-top: 2vh;
-  height: 75vh;
+  background-color: #0077b6; /* 바다색으로 설정 */
+  height: 100vh;
 `;
 
 const SvgContainer = styled.svg`
@@ -218,7 +218,7 @@ const KoreaMap = () => {
           onMouseOver={putMouse}
           onMouseOut={getOutMouse}
           onMouseMove={moveMouse}
-          fill="#3585EA"
+          fill="#35EAC1"
           id="seoul"
           name="Seoul"
           d="m 133.25429,127.63884 0.58,0.33 0,0 3.8,3.83 -0.1,1.78 0.55,0.52 0.32,3.1 0.57,0.53 0.56,-0.1 2.41,-1.25 2.57,5.7 0.53,0.13 1.81,-0.73 1.21,0.5 2.39,-0.1 4.17,-2.31 3.08,-0.29 0,1.71 0.68,1.22 3.65,-2.08 2.99,-0.26 1.68,-1.58 -0.45,-0.56 0.43,-0.59 0.63,0.16 0.63,-0.46 1.28,-1.72 0,-0.59 -1.18,-0.49 0.4,-2.51 0.99,-0.99 1.76,-0.62 0.45,-0.53 -0.66,-2.41 -0.79,-1.15 -1.15,0.82 -2.47,0.6 -1.18,0.76 -1.18,0.16 -0.37,-0.59 -0.03,-1.19 1.45,-4.16 -1.11,-1.71 -0.07,-1.85 -0.9,-1.16 -0.1,-4.52 -0.92,-1.09 -1.18,-0.2 -2.63,0.33 -2.33,-0.53 -0.92,0.99 -1.26,0.53 -0.56,0.53 0.03,1.19 -1.1,1.06 -0.08,3 -1.1,0.79 -5.15,0.4 -0.84,1.05 -0.16,3.11 -0.63,0.36 -3.62,1.61 -2.42,-1.15 -1.39,-1.72 -1.26,-0.32 -1.02,2.47 -1.16,0.99 z"
