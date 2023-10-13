@@ -1,4 +1,3 @@
-import Footer from "components/Footer";
 import Graph from "components/graph/Graph";
 import Header from "components/Header";
 import KoreaMap from "components/KoreaMap";
@@ -12,7 +11,6 @@ const Main = () => {
         <Route element={<KoreaMap />} path="/" />
         <Route element={<Graph />} path="/graph" />
       </Routes>
-      {/* <Footer /> */}
     </>
   );
 };

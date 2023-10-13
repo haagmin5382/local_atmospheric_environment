@@ -11,12 +11,13 @@ import { environmentState } from "recoil/environment";
 
 const MapContainer = styled.section`
   background-color: #0077b6; /* 바다색으로 설정 */
-  height: 100vh;
+  margin-top: 6vh;
+  height: 94vh;
 `;
 
 const SvgContainer = styled.svg`
   height: 75vh;
-  width: 100vw;
+  width: 90vw;
 `;
 
 const PathContainer = styled.path`
