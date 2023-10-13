@@ -1,17 +1,17 @@
-import Graph from "components/graph/Graph";
-import Header from "components/Header";
 import KoreaMap from "components/KoreaMap";
-import { Routes, Route } from "react-router-dom";
+import LocalSection from "components/LocalSection";
+import styled from "styled-components";
 
 const Main = () => {
+  const HomeContainer = styled.div`
+    display: flex;
+    align-items: center;
+  `;
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route element={<KoreaMap />} path="/" />
-        <Route element={<Graph />} path="/graph" />
-      </Routes>
-    </>
+    <HomeContainer>
+      <KoreaMap />
+      <LocalSection />
+    </HomeContainer>
   );
 };
 
