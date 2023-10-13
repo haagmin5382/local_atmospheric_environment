@@ -10,14 +10,20 @@ import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
 
 const MapContainer = styled.section`
-  background-color: #0077b6; /* 바다색으로 설정 */
-  margin-top: 6vh;
-  height: 94vh;
+  height: 70vh;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 `;
 
 const SvgContainer = styled.svg`
-  height: 75vh;
-  width: 90vw;
+  background-color: #add8e6;
+  border-radius: 10px;
+  padding: 3vw;
+  margin-top: 15vh;
+  height: 50vh;
+  /* width: 50vw; */
 `;
 
 const PathContainer = styled.path`

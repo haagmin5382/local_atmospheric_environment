@@ -6,11 +6,11 @@ import Typography from "@mui/material/Typography";
 
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" color="transparent" enableColorOnDark>
+    <Box>
+      <AppBar position="static" color="transparent" enableColorOnDark>
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit" component="div">
-            South Korea Fine Dust Map
+            South Korea atmospheric environment
           </Typography>
         </Toolbar>
       </AppBar>
