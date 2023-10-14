@@ -9,11 +9,11 @@ import { environmentState } from "recoil/environment";
 import { regionEnvironmentState } from "recoil/regionEnvironment";
 
 const MapContainer = styled.section`
-  height: 70vh;
+  /* height: 70vh; */
   text-align: center;
-  margin: 0 auto;
   display: flex;
   align-items: center;
+  margin-left: 10vw;
 `;
 
 const SvgContainer = styled.svg`
@@ -22,7 +22,7 @@ const SvgContainer = styled.svg`
   padding: 3vw;
   margin-top: 15vh;
   height: 50vh;
-  /* width: 50vw; */
+  width: 30vw;
 `;
 
 const PathContainer = styled.path`
@@ -35,11 +35,16 @@ const PathContainer = styled.path`
   }
 `;
 
-const KoreaMap = () => {
+const KoreaMap = ({
+  ModalRegion,
+  setModalRegion,
+}: {
+  ModalRegion: string;
+  setModalRegion: (state: string) => void;
+}) => {
   const navigate = useNavigate();
 
   const [isModalOpened, setModalOpen] = useState(false);
-  const [ModlaRegion, setModalRegion] = useState("");
 
   const [environmentValue, setEnvironmentValue] =
     useRecoilState(environmentState);
@@ -66,7 +71,7 @@ const KoreaMap = () => {
     callEnvironmentData(regions[target]).then((data: any) => {
       setEnvironmentValue(data);
     });
-    navigate(`/graph/${target}`);
+    navigate(`/graph`);
   };
 
   // Throttle 적용
@@ -111,7 +116,7 @@ const KoreaMap = () => {
   return (
     <MapContainer>
       {isModalOpened ? (
-        <Modal ModlaRegion={ModlaRegion} mouseLocation={mouseLocation} />
+        <Modal ModalRegion={ModalRegion} mouseLocation={mouseLocation} />
       ) : null}
       <SvgContainer xmlns="img/south-korea.svg" viewBox="0 0 524 631">
         <PathContainer
