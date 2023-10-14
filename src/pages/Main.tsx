@@ -7,7 +7,7 @@ const Main = () => {
     display: flex;
     align-items: center;
   `;
-  return (
+  return (      
     <HomeContainer>
       <KoreaMap />
       <LocalSection />

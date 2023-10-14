@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 import { callEnvironmentData } from "utils/api";
-import { setInfo } from "../redux/index";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { regions } from "resource/region";
 import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
+import { regionEnvironmentState } from "recoil/regionEnvironment";
 
 const MapContainer = styled.section`
   height: 70vh;
@@ -37,7 +36,6 @@ const PathContainer = styled.path`
 `;
 
 const KoreaMap = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [isModalOpened, setModalOpen] = useState(false);
@@ -45,6 +43,9 @@ const KoreaMap = () => {
 
   const [environmentValue, setEnvironmentValue] =
     useRecoilState(environmentState);
+  const [RegionEnvironmentValue, setRegionEnvironmentValue] = useRecoilState(
+    regionEnvironmentState
+  );
 
   // 온마우스 이벤트
   const putMouse = (e: React.MouseEvent<SVGPathElement>) => {
@@ -62,12 +63,10 @@ const KoreaMap = () => {
   const clickRegion = (e: React.MouseEvent<SVGPathElement>) => {
     const target = (e.target as Element).id;
 
-    dispatch(setInfo("")); // loading indicator 띄우기
     callEnvironmentData(regions[target]).then((data: any) => {
-      dispatch(setInfo(data));
       setEnvironmentValue(data);
     });
-    navigate("/graph");
+    navigate(`/graph/${target}`);
   };
 
   // Throttle 적용
@@ -90,6 +89,24 @@ const KoreaMap = () => {
       }, 200);
     }
   };
+
+  // useEffect(() => {
+  //   const keyOfRegions = Object.keys(regions);
+
+  //   for (let city in regions) {
+  //     callEnvironmentData(regions[city]).then((res: any) => {
+  //       const sidoName = res.data?.response?.body?.items[0].sidoName;
+  //       const key = keyOfRegions.find(
+  //         (key) => regions[key] === sidoName
+  //       ) as string;
+
+  //       setRegionEnvironmentValue((prevRegionEnvironmentValue) => ({
+  //         ...prevRegionEnvironmentValue,
+  //         [key]: res.data?.response?.body,
+  //       }));
+  //     });
+  //   }
+  // }, []);
 
   return (
     <MapContainer>

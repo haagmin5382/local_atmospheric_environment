@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import LoadingSpinner from "../LoadingSpinner";
 import {
   Chart as ChartJS,
@@ -15,6 +14,8 @@ import { useEffect } from "react";
 import { ItemsData, getAverageParticle } from "utils/getAverage";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
+import { regionEnvironmentState } from "recoil/regionEnvironment";
+import { useParams } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -26,29 +27,15 @@ ChartJS.register(
   Legend
 );
 
-type EnvironmentData = {
-  info: {
-    value: {
-      data: {
-        response: {
-          body: {
-            items: Array<ItemsData>;
-          };
-        };
-      };
-    };
-  };
-};
-
 const Graph = () => {
   // redux api데이터
-
-  const environment = useSelector((state: EnvironmentData) => {
-    return state.info.value?.data?.response?.body.items;
-  });
+  const environmentValue = useRecoilValue(environmentState);
+  const regionEnvironmentValue = useRecoilValue(regionEnvironmentState);
+  const regionEnvironmentData = regionEnvironmentValue;
+  const environmentData = environmentValue?.data?.response?.body?.items;
 
   // 값이 측정되지 않은 것들을 filter
-  const filteredData = environment?.filter((obj: ItemsData) => {
+  const filteredData = environmentData?.filter((obj: ItemsData) => {
     return (
       obj.pm10Value !== "-" &&
       obj.pm25Value !== "-" &&
@@ -108,9 +95,6 @@ const Graph = () => {
       e.returnValue = "";
     };
   }, []);
-  const environmentValue = useRecoilValue(environmentState);
-
-  console.log(environmentValue);
 
   return (
     <div>
