@@ -23,14 +23,14 @@ const ModalContainer = styled.div<ModalProps>`
 `;
 
 const Modal = ({
-  ModlaRegion,
+  ModalRegion,
   mouseLocation,
 }: {
-  ModlaRegion: string;
+  ModalRegion: string;
   mouseLocation: Array<number>;
 }) => {
   return (
-    <ModalContainer mouseLocation={mouseLocation}>{ModlaRegion}</ModalContainer>
+    <ModalContainer mouseLocation={mouseLocation}>{ModalRegion}</ModalContainer>
   );
 };
 
