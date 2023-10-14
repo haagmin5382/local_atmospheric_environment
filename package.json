@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mui/material": "^5.14.13",
     "@reduxjs/toolkit": "^1.8.2",
     "@svg-maps/south-korea": "^1.0.1",
     "@testing-library/jest-dom": "^5.16.4",

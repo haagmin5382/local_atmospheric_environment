@@ -10,7 +10,7 @@ const Main = () => {
       <Header />
       <Routes>
         <Route element={<KoreaMap />} path="/" />
-        <Route element={<Graph />} path="/graph" />
+        <Route element={<Graph />} path="/graph/:region" />
       </Routes>
       <Footer />
     </>
