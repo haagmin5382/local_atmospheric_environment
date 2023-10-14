@@ -12,13 +12,25 @@ const Container = styled.div`
   background-color: #0077b6; // 바다색으로 설정
 `;
 const MapContainer = styled.section`
+<<<<<<< HEAD
   height: 75vh;
   background-color: #0077b6; // 바다색으로 설정
+=======
+  height: 70vh;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+>>>>>>> dbe268f254b927d7dfa362ecfbda65a1bf0aa0b2
 `;
 
 const SvgContainer = styled.svg`
-  height: 75vh;
-  width: 100vw;
+  background-color: #add8e6;
+  border-radius: 10px;
+  padding: 3vw;
+  margin-top: 15vh;
+  height: 50vh;
+  /* width: 50vw; */
 `;
 
 const PathContainer = styled.path`

@@ -1,20 +1,19 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
-const HeaderContainer = styled.header`
-  width: 100vw;
-  height: 15vh;
-  line-height: 15vh;
-  background-color: black;
-  color: white;
-  text-align: center;
-  font-size: 3rem;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: bold;
-`;
-
-const Header = () => {
-  return <HeaderContainer>지역별 미세먼지 그래프</HeaderContainer>;
-};
-
-export default Header;
+export default function Header() {
+  return (
+    <Box>
+      <AppBar position="static" color="transparent" enableColorOnDark>
+        <Toolbar variant="dense">
+          <Typography variant="h6" color="inherit" component="div">
+            South Korea atmospheric environment
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+}
