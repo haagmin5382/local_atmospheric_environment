@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { callEnvironmentData } from "utils/api";
 import Modal from "./Modal";
@@ -7,21 +7,13 @@ import { regions } from "resource/region";
 import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
 import { regionEnvironmentState } from "recoil/regionEnvironment";
-const Container = styled.div`
-  /* position: fixed; */
-  background-color: #0077b6; // 바다색으로 설정
-`;
+
 const MapContainer = styled.section`
-<<<<<<< HEAD
-  height: 75vh;
-  background-color: #0077b6; // 바다색으로 설정
-=======
   height: 70vh;
   text-align: center;
   margin: 0 auto;
   display: flex;
   align-items: center;
->>>>>>> dbe268f254b927d7dfa362ecfbda65a1bf0aa0b2
 `;
 
 const SvgContainer = styled.svg`

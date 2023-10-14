@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 const LocalSection = () => {
   const LocalSectionConatiner = styled.div`
-    text-align: center;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
+    background-color: black;
+    border-radius: 10px;
+    padding: 3vw;
+    margin-top: 15vh;
+    height: 25vh;
+    width: 30vw;
   `;
 
-  return <LocalSectionConatiner>Hello</LocalSectionConatiner>;
+  return <LocalSectionConatiner></LocalSectionConatiner>;
 };
 
 export default LocalSection;
