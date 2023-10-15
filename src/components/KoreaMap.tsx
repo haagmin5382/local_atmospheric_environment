@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { callEnvironmentData } from "utils/api";
 import Modal from "./Modal";
@@ -95,23 +95,13 @@ const KoreaMap = ({
     }
   };
 
-  // useEffect(() => {
-  //   const keyOfRegions = Object.keys(regions);
+  useEffect(() => {
+    const keyOfRegions = Object.keys(regions);
 
-  //   for (let city in regions) {
-  //     callEnvironmentData(regions[city]).then((res: any) => {
-  //       const sidoName = res.data?.response?.body?.items[0].sidoName;
-  //       const key = keyOfRegions.find(
-  //         (key) => regions[key] === sidoName
-  //       ) as string;
-
-  //       setRegionEnvironmentValue((prevRegionEnvironmentValue) => ({
-  //         ...prevRegionEnvironmentValue,
-  //         [key]: res.data?.response?.body,
-  //       }));
-  //     });
-  //   }
-  // }, []);
+    callEnvironmentData().then((res) => {
+      const dataObjArray = res?.data?.response?.body?.items;
+    });
+  }, []);
 
   return (
     <MapContainer>
