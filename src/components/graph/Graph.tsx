@@ -14,8 +14,6 @@ import { useEffect } from "react";
 import { ItemsData, getAverageParticle } from "utils/getAverage";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
-import { regionEnvironmentState } from "recoil/regionEnvironment";
-import { useParams } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -30,8 +28,6 @@ ChartJS.register(
 const Graph = () => {
   // redux api데이터
   const environmentValue = useRecoilValue(environmentState);
-  const regionEnvironmentValue = useRecoilValue(regionEnvironmentState);
-  const regionEnvironmentData = regionEnvironmentValue;
   const environmentData = environmentValue?.data?.response?.body?.items;
 
   // 값이 측정되지 않은 것들을 filter

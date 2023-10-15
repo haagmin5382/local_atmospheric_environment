@@ -7,6 +7,8 @@ import { regions } from "resource/region";
 import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
 import { regionEnvironmentState } from "recoil/regionEnvironment";
+import { ItemsData } from "utils/getAverage";
+import { getNationwideData } from "utils/getNationwideData";
 
 const MapContainer = styled.section`
   /* height: 70vh; */
@@ -51,6 +53,7 @@ const KoreaMap = ({
   const [RegionEnvironmentValue, setRegionEnvironmentValue] = useRecoilState(
     regionEnvironmentState
   );
+  const [environmentData, setEnvironmentData] = useState([]);
 
   // 온마우스 이벤트
   const putMouse = (e: React.MouseEvent<SVGPathElement>) => {
@@ -96,13 +99,22 @@ const KoreaMap = ({
   };
 
   useEffect(() => {
-    const keyOfRegions = Object.keys(regions);
-
     callEnvironmentData().then((res) => {
       const dataObjArray = res?.data?.response?.body?.items;
+      const filteredData = dataObjArray?.filter((obj: ItemsData) => {
+        return (
+          obj.pm10Value !== "-" &&
+          obj.pm25Value !== "-" &&
+          obj.pm10Value !== null &&
+          obj.pm25Value !== null
+        );
+      });
+      setEnvironmentData(filteredData);
     });
+    // const regionData = getNationwideData(environmentData, "서울");
   }, []);
-
+  // const regionData = getNationwideData(environmentData, "전북");
+  // console.log(regionData);
   return (
     <MapContainer>
       {isModalOpened ? (
