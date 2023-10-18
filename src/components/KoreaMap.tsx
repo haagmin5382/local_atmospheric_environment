@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { callEnvironmentData } from "utils/api";
 import Modal from "./Modal";
@@ -10,6 +10,7 @@ import { regionEnvironmentState } from "recoil/regionEnvironment";
 import { ItemsData } from "utils/getAverage";
 import { getNationwideData } from "utils/getNationwideData";
 import { getParticleColor } from "utils/getParticleColor";
+import { getOutMouse, putMouse } from "utils/mouseEvent";
 
 const MapContainer = styled.section`
   /* height: 70vh; */
@@ -44,19 +45,18 @@ const StyledText = styled.text`
   text-anchor: middle;
   alignment-baseline: middle;
 `;
+
+interface KoreaMapProps {
+  ModalRegion: string;
+  setModalRegion: (state: string) => void;
+}
 interface TypeEnvironment {
   [region: string]: {
     pm10Value: number;
     pm25Value: number;
   };
 }
-const KoreaMap = ({
-  ModalRegion,
-  setModalRegion,
-}: {
-  ModalRegion: string;
-  setModalRegion: (state: string) => void;
-}) => {
+const KoreaMap: React.FC<KoreaMapProps> = ({ ModalRegion, setModalRegion }) => {
   const navigate = useNavigate();
 
   const [isModalOpened, setModalOpen] = useState(false);
@@ -66,16 +66,11 @@ const KoreaMap = ({
 
   const [environmentData, setEnvironmentData] = useState<TypeEnvironment>({});
 
-  // 온마우스 이벤트
-  const putMouse = (e: React.MouseEvent<SVGPathElement>) => {
-    const target = (e.target as Element).id;
-    setModalOpen(true); // 지역 위치 알려 주는 모달 오픈
-    setModalRegion(regions[target]);
+  const onMouseHandler = (e: React.MouseEvent<SVGPathElement>) => {
+    putMouse(e, setModalOpen, setModalRegion);
   };
-
-  // 마우스 아웃 이벤트
-  const getOutMouse = () => {
-    setModalOpen(false); // 지역 위치 알려 주는 모달 클로즈
+  const offMouseHandler = () => {
+    getOutMouse(setModalOpen);
   };
 
   // 클릭 이벤트
@@ -108,8 +103,7 @@ const KoreaMap = ({
       }, 200);
     }
   };
-
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     callEnvironmentData().then((res) => {
       const dataObjArray = res?.data?.response?.body?.items;
       const filteredData = dataObjArray?.filter((obj: ItemsData) => {
@@ -125,7 +119,28 @@ const KoreaMap = ({
         setEnvironmentData((prevState) => ({ ...prevState, ...regionData })); //
       }
     });
+    return environmentData;
   }, []);
+
+  useEffect(() => {
+    fetchData();
+    // callEnvironmentData().then((res) => {
+    //   const dataObjArray = res?.data?.response?.body?.items;
+    //   const filteredData = dataObjArray?.filter((obj: ItemsData) => {
+    //     return (
+    //       obj.pm10Value !== "-" &&
+    //       obj.pm25Value !== "-" &&
+    //       obj.pm10Value !== null &&
+    //       obj.pm25Value !== null
+    //     );
+    //   });
+    //   for (const city in regions) {
+    //     const regionData = getNationwideData(filteredData, regions[city]);
+    //     setEnvironmentData((prevState) => ({ ...prevState, ...regionData })); //
+    //   }
+    // });
+  }, []);
+  // console.log(Object.keys(environmentData).length);
   console.log(environmentData);
   const {
     강원,
@@ -154,8 +169,8 @@ const KoreaMap = ({
       <SvgContainer xmlns="img/south-korea.svg" viewBox="0 0 524 631">
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(부산)}
           id="busan"
@@ -171,8 +186,8 @@ const KoreaMap = ({
         </PathText> */}
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(대구)}
           id="daegu"
@@ -181,8 +196,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(대전)}
           id="daejeon"
@@ -191,8 +206,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(강원)}
           id="gangwon"
@@ -201,8 +216,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(광주)}
           id="gwangju"
@@ -211,8 +226,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(경기)}
           id="gyeonggi"
@@ -221,8 +236,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(인천)}
           id="incheon"
@@ -231,8 +246,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(제주)}
           id="jeju"
@@ -241,8 +256,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(충북)}
           id="northChungcheong"
@@ -251,8 +266,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(경북)}
           id="northGyeongsang"
@@ -261,8 +276,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(전북)}
           id="northJeolla"
@@ -271,8 +286,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(세종)}
           id="sejong"
@@ -281,8 +296,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(서울)}
           id="seoul"
@@ -291,8 +306,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(충남)}
           id="southChungcheong"
@@ -301,8 +316,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(경남)}
           id="southGyeongsang"
@@ -311,8 +326,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(전남)}
           id="southJeolla"
@@ -321,8 +336,8 @@ const KoreaMap = ({
         />
         <PathContainer
           onClick={clickRegion}
-          onMouseOver={putMouse}
-          onMouseOut={getOutMouse}
+          onMouseOver={onMouseHandler}
+          onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(울산)}
           id="ulsan"
@@ -334,4 +349,4 @@ const KoreaMap = ({
   );
 };
 
-export default KoreaMap;
+export default React.memo(KoreaMap);
