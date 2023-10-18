@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const callEnvironmentData = async (region = "전국") => {
+  console.log("API 실행");
   try {
     return await axios
       .get(

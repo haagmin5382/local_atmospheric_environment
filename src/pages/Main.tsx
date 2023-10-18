@@ -1,6 +1,7 @@
 import KoreaMap from "components/KoreaMap";
 import LocalSection from "components/LocalSection";
 import { useState } from "react";
+import { regions } from "resource/region";
 import styled from "styled-components";
 
 const Main = () => {
@@ -8,6 +9,7 @@ const Main = () => {
     display: flex;
     /* align-items: center; */
   `;
+
   const [ModalRegion, setModalRegion] = useState("");
   return (
     <HomeContainer>
