@@ -9,7 +9,7 @@ export const getNationwideData = (array: Array<ItemsData>, region: string) => {
   const average25value = getAverageParticle(regionEnvironmentData, "pm25Value"); // 초미세먼지
   return {
     [region]: {
-      pm10Vlaue: average10value,
+      pm10Value: average10value,
       pm25Value: average25value,
     },
   };
