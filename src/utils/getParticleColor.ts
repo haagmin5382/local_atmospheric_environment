@@ -8,7 +8,7 @@ export const getParticleColor = (region?: {
       return "#3A7AF2";
     }
     if (30 < particleValue && particleValue <= 80) {
-      return "#4EF5C3";
+      return "#47c73b";
     }
     if (80 < particleValue && particleValue <= 150) {
       return "#F6A626";
