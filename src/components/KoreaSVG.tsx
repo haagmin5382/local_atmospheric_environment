@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { airEnvironmentState } from "recoil/airEnvironment";
+import { useRecoilState } from "recoil";
 import { environmentState } from "recoil/environment";
 import { regions } from "resource/region";
 import styled from "styled-components";
@@ -41,7 +40,6 @@ const StyledText = styled.text`
   font-size: 20px;
   stroke-width: 2;
   text-anchor: middle;
-  alignment-baseline: middle;
 `;
 const ParticleValue = styled.text`
   border: 3px;
@@ -318,55 +316,56 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 361.40429,346.70884 1.8,1.47 2.01,0.31 0.98,0.59 0.23,0.82 0,0 -0.42,2.85 0,0 0.28,0.77 0.74,0.33 0,0 1.97,0.66 0,0 1.43,-0.25 2.82,-1.84 1.12,-0.31 0,0 1.48,-0.01 0,0 4.89,1.74 0,0 1.76,0.42 0,0 2.9,0.41 0.7,1.45 -0.03,1.38 -0.74,0.2 -0.39,0.58 0.53,3.14 -0.61,1.06 -0.05,1.35 -0.11,0.36 -1.02,0.16 0.03,0.48 0.73,-0.39 -0.18,1.58 -1.21,0.51 0.03,0.29 0.84,-0.16 0.13,0.61 -1.26,0.61 0.18,0.45 0.95,-0.39 0.36,0.65 -0.47,-0.07 -0.55,1.25 -1,-0.41 0.08,0.35 -1,0.13 0.05,0.51 -0.52,0.48 -0.42,-0.19 -0.24,-1.48 0.4,-0.99 -0.63,-0.84 -0.53,-0.06 0.19,-1.38 -0.82,-1.57 -1.94,-2.13 -1.5,-0.48 0,0.68 1.39,0.48 0.92,1.19 -0.08,1.12 0.97,0.26 -0.07,0.83 0.42,0.62 -0.32,0.44 -0.52,-0.22 -1.03,0.35 -0.5,-0.45 0.53,0.71 0.97,-0.26 0.89,1.58 -0.63,0.45 -0.13,1.15 -0.65,0.23 -1.19,1.41 -0.68,-0.03 -0.5,-1.13 -1.05,-0.54 0.68,0.8 0.08,2.21 0.29,0.26 0.87,-0.32 -0.5,0.99 1.36,-0.73 -0.41,0.73 0.41,0.87 -0.31,0.39 -1.02,0.06 -0.24,0.77 0.39,1.15 0.71,0 0.03,0.58 -0.5,0.16 -0.29,1.41 -0.81,0.36 -0.21,0.99 0.1,0.74 0.97,0.29 0.71,1.47 -1.49,0.87 -0.56,-0.55 -0.63,0.06 -0.5,1.13 -0.6,-0.03 -0.1,0.67 -0.5,0.22 -0.32,1.09 -1.07,0.07 -0.27,1.18 -1.15,-0.13 -0.29,-0.8 -0.55,0.26 0.17,-1.51 -1,-1.68 0,0 -1.34,-1.34 -3.98,0 -0.04,-0.76 0,0 -1.54,-1.88 0,0 -3.09,-0.21 0,0 -2.23,-1.89 -3.43,-3.98 0,0 -3.26,-3.36 -2.4,-0.2 0,0 -2.75,0 -2.23,-1.05 -0.34,-4.83 2.23,-1.89 0,0 1.2,-1.05 0,-1.46 -1.47,-2.43 0,0 3.92,-3.09 0,0 1.66,-0.17 0,0 0.68,0.13 0.65,-0.87 -1.35,-2.48 -0.22,-1.06 0.59,-0.5 4.16,-2.57 3.11,-1.02 1.63,0.29 2.59,-0.65 z"
         />
         <StyledText x="280" y="100">
-          강원
+          강원 {강원["pm10Value"]}
         </StyledText>
         <StyledText x="350" y="430">
-          부산
+          부산 {부산["pm10Value"]}
         </StyledText>
         <StyledText x="190" y="150">
-          경기
+          경기 {경기["pm10Value"]}
         </StyledText>
         <StyledText x="150" y="110">
-          서울
+          서울 {서울["pm10Value"]}
         </StyledText>
         <StyledText x="80" y="140">
-          인천
+          인천 {인천["pm10Value"]}
         </StyledText>
         <StyledText x="220" y="210">
-          충북
+          충북 {충북["pm10Value"]}
         </StyledText>
         <StyledText x="320" y="270">
-          경북
+          경북 {경북["pm10Value"]}
         </StyledText>
         <StyledText x="170" y="350">
-          전북
+          전북 {전북["pm10Value"]}
         </StyledText>
         <StyledText x="260" y="390">
-          경남
+          경남 {경남["pm10Value"]}
         </StyledText>
-        <StyledText x="180" y="430">
-          전남
+        <StyledText x="190" y="430">
+          전남 {전남["pm10Value"]}
         </StyledText>
         <StyledText x="120" y="230">
-          충남
+          충남 {충남["pm10Value"]}
         </StyledText>
         <StyledText x="400" y="370">
-          울산
+          울산 {울산["pm10Value"]}
         </StyledText>
         <StyledText x="330" y="340">
-          대구
+          대구 {대구["pm10Value"]}
         </StyledText>
-        <StyledText x="120" y="420">
-          광주
+        <StyledText x="100" y="410">
+          광주 {광주["pm10Value"]}
         </StyledText>
         <StyledText x="170" y="290">
-          대전
+          대전 {대전["pm10Value"]}
         </StyledText>
         <StyledText x="160" y="255">
-          세종
+          세종 {세종["pm10Value"]}
         </StyledText>
+
         <StyledText x="110" y="610">
-          제주
+          제주 {제주["pm10Value"]}
         </StyledText>
       </SvgContainer>
     </MapContainer>
