@@ -11,6 +11,7 @@ to {
 const LocalSectionConatiner = styled.div`
   background-image: ${(props: { ModalRegion: string }) =>
     `url(/img/regionImg/${props.ModalRegion}.jpg)`}; // 동적 이미지 경로
+  position: relative;
 
   background-repeat: no-repeat;
   background-size: cover; // 이미지를 꽉 채우도록 설정 => 크기에 이미지를 맞춤
@@ -22,7 +23,6 @@ const LocalSectionConatiner = styled.div`
   margin-top: 15vh;
   height: 25vh;
   width: 30vw;
-  margin-left: 10vw;
   animation: ${fadeIn} 1s; // 애니메이션을 스타일에 적용
 `;
 const TextOverlay = styled.div`
@@ -32,6 +32,17 @@ const TextOverlay = styled.div`
   font-size: 24px; /* 원하는 글꼴 크기 및 스타일 */
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
+`;
+const Gradient = styled.div`
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 30%; // 그라데이션이 적용될 오른쪽 영역의 너비를 조절합니다.
+  background: linear-gradient(
+    to left,
+    transparent,
+    white
+  ); /* 그라데이션 스타일을 정의합니다. */
 `;
 const LocalSection = ({ ModalRegion }: { ModalRegion: string }) => {
   return (
