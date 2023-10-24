@@ -10,9 +10,9 @@ import { useRecoilState } from "recoil";
 import { airEnvironmentState } from "recoil/airEnvironment";
 import LocalSection from "components/LocalSection";
 import KoreaSVG from "components/KoreaSVG";
-import DustStatistics from "components/\bDustStatistics";
+import DustStatistics from "components/DustStatistics";
 
-interface TypeEnvironment {
+export interface TypeEnvironment {
   [region: string]: {
     pm10Value: number;
     pm25Value: number;

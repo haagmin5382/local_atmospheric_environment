@@ -1,4 +1,7 @@
+import { TypeEnvironment } from "pages/Main";
 import React from "react";
+import { useRecoilValue } from "recoil";
+import { airEnvironmentState } from "recoil/airEnvironment";
 import styled, { keyframes } from "styled-components";
 const fadeIn = keyframes`
 from {
@@ -25,7 +28,7 @@ const LocalSectionConatiner = styled.div`
   width: 30vw;
   animation: ${fadeIn} 1s; // 애니메이션을 스타일에 적용
 `;
-const TextOverlay = styled.div`
+const TextRegion = styled.div`
   position: absolute; //절대 위치
   transform: translate(-50%, -50%); /* 수평 및 수직 중앙 정렬 */
   color: white; /* 텍스트 색상 */
@@ -33,21 +36,34 @@ const TextOverlay = styled.div`
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
 `;
-const Gradient = styled.div`
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 30%; // 그라데이션이 적용될 오른쪽 영역의 너비를 조절합니다.
-  background: linear-gradient(
-    to left,
-    transparent,
-    white
-  ); /* 그라데이션 스타일을 정의합니다. */
+const TextDust = styled.div`
+  position: absolute; //절대 위치
+  bottom: 4vh;
+  left: 1vw;
+  color: white; /* 텍스트 색상 */
+  font-size: 15px; /* 원하는 글꼴 크기 및 스타일 */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
 `;
+const TextParticle = styled.div`
+  position: absolute; //절대 위치
+  bottom: 1vh;
+  left: 1vw;
+  color: white; /* 텍스트 색상 */
+  font-size: 15px; /* 원하는 글꼴 크기 및 스타일 */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
+`;
+
 const LocalSection = ({ ModalRegion }: { ModalRegion: string }) => {
+  const particleValue = useRecoilValue(airEnvironmentState) as TypeEnvironment;
   return (
     <LocalSectionConatiner ModalRegion={ModalRegion}>
-      <TextOverlay> {ModalRegion}</TextOverlay>
+      <TextRegion> {ModalRegion}</TextRegion>
+      <TextDust>미세먼지 {particleValue[ModalRegion].pm10Value} ㎍/㎥</TextDust>
+      <TextParticle>
+        초미세먼지 {particleValue[ModalRegion].pm25Value} ㎍/㎥
+      </TextParticle>
     </LocalSectionConatiner>
   );
 };
