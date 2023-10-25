@@ -1,4 +1,3 @@
-import Graph from "components/graph/Graph";
 import Header from "components/Header";
 import { Routes, Route } from "react-router-dom";
 import Main from "./Main";
@@ -9,7 +8,6 @@ const Router = () => {
       <Header />
       <Routes>
         <Route element={<Main />} path="/" />
-        <Route element={<Graph />} path="/graph" />
       </Routes>
     </>
   );

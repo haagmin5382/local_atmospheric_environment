@@ -11,9 +11,9 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useEffect } from "react";
-import { ItemsData, getAverageParticle } from "utils/getAverage";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
+import { ItemsData } from "utils/getNationwideData";
 
 ChartJS.register(
   CategoryScale,
@@ -25,20 +25,9 @@ ChartJS.register(
   Legend
 );
 
-const Graph = () => {
+const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   // redux api데이터
-  const environmentValue = useRecoilValue(environmentState);
-  const environmentData = environmentValue?.data?.response?.body?.items;
-
-  // 값이 측정되지 않은 것들을 filter
-  const filteredData = environmentData?.filter((obj: ItemsData) => {
-    return (
-      obj.pm10Value !== "-" &&
-      obj.pm25Value !== "-" &&
-      obj.pm10Value !== null &&
-      obj.pm25Value !== null
-    );
-  });
+  const environmentValue = useRecoilValue(environmentState) as any;
 
   // 그래프 그리기
   const options = {
@@ -50,21 +39,23 @@ const Graph = () => {
       title: {
         display: true,
         text: `${
-          filteredData ? filteredData[0]?.sidoName : ""
+          ModalRegion && environmentValue[ModalRegion]
+            ? environmentValue[ModalRegion][0].sidoName
+            : ""
         } 지역 미세먼지 수치`,
       },
     },
   };
 
-  const labels = filteredData?.map((obj: ItemsData) => {
+  const labels = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
 
-  const fineDust = filteredData?.map((obj: ItemsData) => {
+  const fineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj.pm10Value;
   });
 
-  const ultraFineDust = filteredData?.map((obj: ItemsData) => {
+  const ultraFineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj.pm25Value;
   });
 
@@ -95,26 +86,19 @@ const Graph = () => {
   return (
     <div>
       <h2>
-        시각 :{" "}
-        {filteredData ? filteredData[0]?.dataTime : "데이터를 불러오는 중..."}
+        {/* 시각 :{" "}
+        {environmentValue
+          ? environmentValue[0]?.dataTime
+          : "데이터를 불러오는 중..."} */}
       </h2>
-      <h2>
-        {filteredData ? filteredData[0]?.sidoName : null} 지역 평균 미세먼지 :{" "}
-        {filteredData
-          ? getAverageParticle(filteredData, "pm10Value")
-          : " 데이터를 불러오는 중..."}
-      </h2>
-      <h2>
-        {filteredData ? filteredData[0]?.sidoName : null} 지역 평균 초미세먼지 :
-        {filteredData
-          ? getAverageParticle(filteredData, "pm25Value")
-          : " 데이터를 불러오는 중..."}{" "}
-      </h2>
-
-      {filteredData ? (
-        <Bar options={options} data={data} />
+      {ModalRegion ? (
+        environmentValue[ModalRegion] ? (
+          <Bar options={options} data={data} />
+        ) : (
+          <LoadingSpinner />
+        )
       ) : (
-        <LoadingSpinner />
+        <></>
       )}
     </div>
   );
