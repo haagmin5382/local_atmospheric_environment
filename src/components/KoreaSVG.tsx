@@ -9,10 +9,7 @@ import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 import Modal from "./Modal";
 const MapContainer = styled.section`
-  /* height: 70vh; */
   text-align: center;
-  display: flex;
-  align-items: center;
   margin-left: 10vw;
 `;
 
@@ -35,6 +32,7 @@ const PathContainer = styled.path`
   }
 `;
 const StyledText = styled.text`
+  cursor: pointer;
   font-family: Arial;
   font-weight: bold;
   font-size: 20px;

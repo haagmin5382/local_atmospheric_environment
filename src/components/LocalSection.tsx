@@ -60,9 +60,13 @@ const LocalSection = ({ ModalRegion }: { ModalRegion: string }) => {
   return (
     <LocalSectionConatiner ModalRegion={ModalRegion}>
       <TextRegion> {ModalRegion}</TextRegion>
-      <TextDust>미세먼지 {particleValue[ModalRegion].pm10Value} ㎍/㎥</TextDust>
+      <TextDust>
+        {ModalRegion &&
+          "미세먼지 " + particleValue[ModalRegion]?.pm10Value + "㎍/㎥"}{" "}
+      </TextDust>
       <TextParticle>
-        초미세먼지 {particleValue[ModalRegion].pm25Value} ㎍/㎥
+        {ModalRegion &&
+          "초미세먼지 " + particleValue[ModalRegion]?.pm25Value + "㎍/㎥"}{" "}
       </TextParticle>
     </LocalSectionConatiner>
   );
