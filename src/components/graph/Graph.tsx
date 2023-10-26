@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
 import { ItemsData } from "utils/getNationwideData";
+import styled from "@emotion/styled";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,11 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const GraphContainer = styled.div`
+  width: 36vw;
+  height: 25vh;
+`;
 
 const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   // redux api데이터
@@ -84,13 +90,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   }, []);
 
   return (
-    <div>
-      <h2>
-        {/* 시각 :{" "}
-        {environmentValue
-          ? environmentValue[0]?.dataTime
-          : "데이터를 불러오는 중..."} */}
-      </h2>
+    <GraphContainer>
       {ModalRegion ? (
         environmentValue[ModalRegion] ? (
           <Bar options={options} data={data} />
@@ -100,7 +100,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
       ) : (
         <></>
       )}
-    </div>
+    </GraphContainer>
   );
 };
 

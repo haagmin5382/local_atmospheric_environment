@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LineContainer = styled.div`
   display: flex;
-  margin-left: 10vw;
+  margin-left: 13vw;
 `;
 const HorizontalLine = styled.div`
   width: 7.5vw;
