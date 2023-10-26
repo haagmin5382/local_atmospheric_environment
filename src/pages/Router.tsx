@@ -5,7 +5,6 @@ import Main from "./Main";
 const Router = () => {
   return (
     <>
-      <Header />
       <Routes>
         <Route element={<Main />} path="/" />
       </Routes>

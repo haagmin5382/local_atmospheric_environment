@@ -26,7 +26,8 @@ const LocalSectionConatiner = styled.div`
   margin-top: 15vh;
   height: 25vh;
   width: 30vw;
-  animation: ${fadeIn} 1s; // 애니메이션을 스타일에 적용
+  animation: ${fadeIn} 1s;
+  transition: background-image 1s;
 `;
 const TextRegion = styled.div`
   position: absolute; //절대 위치
