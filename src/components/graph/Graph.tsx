@@ -91,7 +91,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
 
   return (
     <GraphContainer>
-      {ModalRegion ? (
+      {ModalRegion !== "전국" ? (
         environmentValue[ModalRegion] ? (
           <Bar options={options} data={data} />
         ) : (

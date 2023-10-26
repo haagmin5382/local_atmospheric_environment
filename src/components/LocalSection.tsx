@@ -1,7 +1,10 @@
 import { TypeEnvironment } from "pages/Main";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { airEnvironmentState } from "recoil/airEnvironment";
+import {
+  KoreaAverageSelector,
+  RegionAverageState,
+} from "recoil/airEnvironment";
 import styled, { keyframes } from "styled-components";
 const fadeIn = keyframes`
 from {
@@ -57,17 +60,21 @@ const TextParticle = styled.div`
 `;
 
 const LocalSection = ({ ModalRegion }: { ModalRegion: string }) => {
-  const particleValue = useRecoilValue(airEnvironmentState) as TypeEnvironment;
+  const particleValue = useRecoilValue(RegionAverageState) as TypeEnvironment;
+  const koreaValue = useRecoilValue(KoreaAverageSelector);
+
   return (
     <LocalSectionConatiner ModalRegion={ModalRegion}>
       <TextRegion> {ModalRegion}</TextRegion>
       <TextDust>
-        {ModalRegion &&
-          "미세먼지 " + particleValue[ModalRegion]?.pm10Value + "㎍/㎥"}{" "}
+        {ModalRegion === "전국"
+          ? "전국 미세먼지 평균 " + koreaValue?.pm10Value + "㎍/㎥"
+          : "미세먼지 " + particleValue[ModalRegion]?.pm10Value + "㎍/㎥"}
       </TextDust>
       <TextParticle>
-        {ModalRegion &&
-          "초미세먼지 " + particleValue[ModalRegion]?.pm25Value + "㎍/㎥"}{" "}
+        {ModalRegion === "전국"
+          ? "전국 미세먼지 평균 " + koreaValue?.pm25Value + "㎍/㎥"
+          : "미세먼지 " + particleValue[ModalRegion]?.pm25Value + "㎍/㎥"}
       </TextParticle>
     </LocalSectionConatiner>
   );
