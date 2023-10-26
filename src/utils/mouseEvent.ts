@@ -2,7 +2,7 @@ import { regions } from "resource/region";
 
 // 온마우스 이벤트
 export const putMouse = (
-  e: React.MouseEvent<SVGPathElement>,
+  e: React.MouseEvent<SVGPathElement> | React.MouseEvent<SVGElement>,
   setModalOpen: (state: boolean) => void,
   setModalRegion: (state: string) => void
 ) => {

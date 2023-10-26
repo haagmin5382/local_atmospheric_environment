@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { environmentState } from "recoil/environment";
-import { regions } from "resource/region";
 import styled from "styled-components";
-import { callEnvironmentData } from "utils/api";
 import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 import Modal from "./Modal";
@@ -60,28 +55,16 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
     충남,
     충북,
   } = environmentData;
-  const navigate = useNavigate();
 
   const [isModalOpened, setModalOpen] = useState(false);
 
-  const [environmentValue, setEnvironmentValue] =
-    useRecoilState(environmentState);
-
-  const onMouseHandler = (e: React.MouseEvent<SVGPathElement>) => {
+  const onMouseHandler = (
+    e: React.MouseEvent<SVGPathElement> | React.MouseEvent<SVGElement>
+  ) => {
     putMouse(e, setModalOpen, setModalRegion);
   };
   const offMouseHandler = () => {
     getOutMouse(setModalOpen);
-  };
-
-  // 클릭 이벤트
-  const clickRegion = (e: React.MouseEvent<SVGPathElement>) => {
-    const target = (e.target as Element).id;
-
-    callEnvironmentData(regions[target]).then((data: any) => {
-      setEnvironmentValue(data);
-    });
-    navigate(`/graph`);
   };
 
   // Throttle 적용
@@ -113,8 +96,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
 
       <SvgContainer xmlns="img/south-korea.svg" viewBox="0 0 524 631">
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -125,8 +106,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -137,8 +116,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -148,8 +125,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 192.76429,261.00884 0.31,0.17 0,0 0.48,-0.09 0.98,-2.28 0,0 0.61,-0.64 0,0 1.39,0.18 -0.32,1.3 0,0 -0.07,0.64 0,0 0,0.26 2.86,-2.66 0,0 2.5,2.5 0,0 0.24,2.62 0.65,0.75 1.78,0.41 -0.32,1.63 0.77,0.21 1.25,2.18 -1.25,0.31 -1.56,1.56 0,0 -0.94,5.62 0,0 -1.25,6.24 1.17,3.75 0,0 -3.35,2.18 -2.18,2.81 -3.75,-2.19 -2.18,-3.74 0,-1.87 -0.63,-1.56 -1.56,0 0.32,3.12 -0.63,4.99 -0.93,2.19 -1.25,0 -0.94,-3.13 -2.5,-0.93 -1.56,-2.19 -0.31,-3.43 -2.18,-1.87 -0.31,-4.06 2.18,-2.49 -0.31,-8.74 0,0 2.52,-0.58 0,0 0.91,-0.04 3.43,-1.56 0.94,-2.81 0.33,-3.29 -0.31,-0.04 0,0 -0.23,-0.31 3.95,-0.42 z"
         />
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -160,8 +135,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -171,8 +144,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 151.37429,399.96884 -1.95,-2.34 -1.82,-0.87 -2.44,-0.09 -2.44,0.96 -2,1.04 -2.01,2.09 -1.48,0.09 -2.09,-0.7 -1.48,-1.39 -0.61,-2.18 -2.18,-0.08 -2.09,5.31 -2.35,-0.09 -1.74,2.09 -1.13,4.79 0.43,4.09 7.23,1.05 1.83,2.26 1.92,3.84 3.74,0 3.4,-2.01 3.83,0 1.48,-1.04 3.14,0.61 3.39,-2.35 1.4,-1.83 0.78,-1.66 0.09,-2.61 0.87,-1.83 0,-1.39 -2.09,-0.96 -2.61,-0.26"
         />
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -183,8 +154,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -194,8 +163,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 113.77429,124.42884 2.46,-1.99 1.69,-0.73 0.62,-1.58 1.5,-1.27 2.08,0.19 7.46,6.03 0,0 3.83,1.29 -0.13,1.25 0.58,0.33 0,0 -3.54,4.55 0,0 0.13,4.02 3.31,2.9 0,0 0.03,1.19 -0.71,0.79 -0.02,0.66 0,0 0.26,1.15 -0.94,0.82 0,0 -0.55,0.43 -0.29,1.08 0,0 -0.55,-0.16 -0.13,-0.2 -1.31,-0.23 0.47,-1.81 -0.68,-0.53 -0.26,0.07 0.6,0.49 -0.13,0.76 -0.6,0.36 -0.29,-2.2 -0.31,-0.13 0.05,2.27 0.42,0.23 -0.03,0.49 -1.97,2.27 -3.57,-0.49 -3.68,4.64 -3.2,0.03 -0.13,0 -1.26,0.1 -0.34,1.09 -1,-0.03 0.84,-0.26 0.53,-1.84 2.18,0 -0.45,0.82 2.84,0 3.6,-4.51 -1.34,-0.43 -2.7,-2.73 -0.94,-4.28 -0.5,2.31 -1.47,-0.1 0.37,-0.82 -0.5,-0.72 0.68,-0.1 -0.47,-0.39 0.11,-0.56 -0.81,1.29 -0.97,-0.1 -0.24,-0.39 0.37,-1.38 -0.21,-0.89 0.6,-0.03 -0.34,-0.82 0.79,-1.52 2.99,-1.19 1.23,0.4 -0.76,-0.54 -0.16,-1.14 -1.05,0.99 -1.36,0.13 0.05,-1.32 -0.73,-0.39 -0.29,-0.69 0.97,0.1 -0.16,-1.25 -0.58,0 -0.05,-0.82 -0.53,0 -0.08,-0.43 0.68,-0.3 0.05,-1.42 -2.62,1.02 -0.16,0.63 -0.39,-0.4 -0.6,0.23 -2.31,2.02 2.21,-2.08 3.91,-1.62 -0.84,-1.06 -0.74,-0.13 -0.52,-1.42 z m -26.000004,1.62 1.76,0.89 0.08,0.36 0.87,-0.26 0.53,1.55 0.89,0.46 2.97,-0.43 -0.26,1.45 -2.05,-0.43 -1.86,0.63 -0.05,-0.56 -0.34,0 -1.02,0.96 0.37,-2.11 -1.94,-1.91 0.05,-0.6 z m 19.640004,3.16 0.76,0.73 -0.03,0.46 3.57,0.99 0.55,0.92 0.84,0.4 0.42,1.85 -2.26,1.42 -1.39,-0.07 -0.6,-0.59 -1,1.25 -2.13,0.96 -1.73,2.24 -4.02,2.93 -1.550004,-0.2 -1.31,0.76 -0.05,-0.53 0.58,-0.33 -0.18,-1.12 -0.94,-0.66 -1.23,0.82 0.89,-0.92 -0.47,-0.72 -0.74,0.23 0,0.79 -0.63,-0.53 -0.24,0.76 -0.52,-0.72 -1.1,-0.1 0.87,-0.62 -0.47,-0.16 0.13,-0.95 -0.55,0.07 -0.66,-0.72 -0.18,-0.69 0.42,-0.69 1.65,-0.03 3.94,-2.8 5.570004,-0.26 1.34,-0.96 0.68,-2.7 1.77,-0.51 z m -9.850004,14.66 0.11,0.82 0.79,0.26 0.79,1.28 1.100004,0.53 -0.08,0.59 -0.630004,-0.07 0.580004,0.43 -0.710004,0.49 0,0.69 -1.57,0.43 -0.95,-0.92 0.37,-1.25 -0.26,-0.69 -1.18,-0.3 0.81,-1.45 0.08,-0.99 0.75,0.15 z"
         />
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -206,8 +173,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -218,8 +183,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -230,8 +193,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -242,8 +203,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -253,8 +212,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 181.53429,232.61884 1.56,2.18 -0.31,2.81 -2.19,0.63 2.81,3.43 0,2.81 0.45,1.35 3.34,0.2 -0.09,1.45 -0.83,1.83 1.08,1.14 -1.86,6.1 0.57,-0.78 0.4,-0.33 0.71,0.14 0.62,0.86 0.31,0.04 -0.33,3.29 -0.94,2.81 -3.43,1.56 -0.91,0.04 -2.52,0.58 0.31,8.74 -2.18,2.49 -1.71,-2.05 -1.75,-1.35 -1.22,-3.1 0.14,-4.05 -0.27,-2.83 -1.35,-3.91 -2.7,-1.48 -1.88,-2.56 -0.14,-2.02 1.08,-2.43 0,-3.1 -0.13,-3.5 -0.27,-3.37 0.67,-2.43 -0.27,-3.1 -0.54,-2.02 -1.08,-2.02 0.41,-1.76 2.69,-1.08 2.57,0.81 1.48,1.62 2.69,1.62 2.57,0.94 z"
         />
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -264,8 +221,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           d="m 133.25429,127.63884 0.58,0.33 0,0 3.8,3.83 -0.1,1.78 0.55,0.52 0.32,3.1 0.57,0.53 0.56,-0.1 2.41,-1.25 2.57,5.7 0.53,0.13 1.81,-0.73 1.21,0.5 2.39,-0.1 4.17,-2.31 3.08,-0.29 0,1.71 0.68,1.22 3.65,-2.08 2.99,-0.26 1.68,-1.58 -0.45,-0.56 0.43,-0.59 0.63,0.16 0.63,-0.46 1.28,-1.72 0,-0.59 -1.18,-0.49 0.4,-2.51 0.99,-0.99 1.76,-0.62 0.45,-0.53 -0.66,-2.41 -0.79,-1.15 -1.15,0.82 -2.47,0.6 -1.18,0.76 -1.18,0.16 -0.37,-0.59 -0.03,-1.19 1.45,-4.16 -1.11,-1.71 -0.07,-1.85 -0.9,-1.16 -0.1,-4.52 -0.92,-1.09 -1.18,-0.2 -2.63,0.33 -2.33,-0.53 -0.92,0.99 -1.26,0.53 -0.56,0.53 0.03,1.19 -1.1,1.06 -0.08,3 -1.1,0.79 -5.15,0.4 -0.84,1.05 -0.16,3.11 -0.63,0.36 -3.62,1.61 -2.42,-1.15 -1.39,-1.72 -1.26,-0.32 -1.02,2.47 -1.16,0.99 z"
         />
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -276,8 +231,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -288,8 +241,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -300,8 +251,6 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
         />
 
         <PathContainer
-          // onClick={clickRegion}
-          // onMouseOver={onMouseHandler}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
@@ -310,55 +259,75 @@ const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
           name="Ulsan"
           d="m 361.40429,346.70884 1.8,1.47 2.01,0.31 0.98,0.59 0.23,0.82 0,0 -0.42,2.85 0,0 0.28,0.77 0.74,0.33 0,0 1.97,0.66 0,0 1.43,-0.25 2.82,-1.84 1.12,-0.31 0,0 1.48,-0.01 0,0 4.89,1.74 0,0 1.76,0.42 0,0 2.9,0.41 0.7,1.45 -0.03,1.38 -0.74,0.2 -0.39,0.58 0.53,3.14 -0.61,1.06 -0.05,1.35 -0.11,0.36 -1.02,0.16 0.03,0.48 0.73,-0.39 -0.18,1.58 -1.21,0.51 0.03,0.29 0.84,-0.16 0.13,0.61 -1.26,0.61 0.18,0.45 0.95,-0.39 0.36,0.65 -0.47,-0.07 -0.55,1.25 -1,-0.41 0.08,0.35 -1,0.13 0.05,0.51 -0.52,0.48 -0.42,-0.19 -0.24,-1.48 0.4,-0.99 -0.63,-0.84 -0.53,-0.06 0.19,-1.38 -0.82,-1.57 -1.94,-2.13 -1.5,-0.48 0,0.68 1.39,0.48 0.92,1.19 -0.08,1.12 0.97,0.26 -0.07,0.83 0.42,0.62 -0.32,0.44 -0.52,-0.22 -1.03,0.35 -0.5,-0.45 0.53,0.71 0.97,-0.26 0.89,1.58 -0.63,0.45 -0.13,1.15 -0.65,0.23 -1.19,1.41 -0.68,-0.03 -0.5,-1.13 -1.05,-0.54 0.68,0.8 0.08,2.21 0.29,0.26 0.87,-0.32 -0.5,0.99 1.36,-0.73 -0.41,0.73 0.41,0.87 -0.31,0.39 -1.02,0.06 -0.24,0.77 0.39,1.15 0.71,0 0.03,0.58 -0.5,0.16 -0.29,1.41 -0.81,0.36 -0.21,0.99 0.1,0.74 0.97,0.29 0.71,1.47 -1.49,0.87 -0.56,-0.55 -0.63,0.06 -0.5,1.13 -0.6,-0.03 -0.1,0.67 -0.5,0.22 -0.32,1.09 -1.07,0.07 -0.27,1.18 -1.15,-0.13 -0.29,-0.8 -0.55,0.26 0.17,-1.51 -1,-1.68 0,0 -1.34,-1.34 -3.98,0 -0.04,-0.76 0,0 -1.54,-1.88 0,0 -3.09,-0.21 0,0 -2.23,-1.89 -3.43,-3.98 0,0 -3.26,-3.36 -2.4,-0.2 0,0 -2.75,0 -2.23,-1.05 -0.34,-4.83 2.23,-1.89 0,0 1.2,-1.05 0,-1.46 -1.47,-2.43 0,0 3.92,-3.09 0,0 1.66,-0.17 0,0 0.68,0.13 0.65,-0.87 -1.35,-2.48 -0.22,-1.06 0.59,-0.5 4.16,-2.57 3.11,-1.02 1.63,0.29 2.59,-0.65 z"
         />
-        <StyledText x="280" y="100">
+        <StyledText id="gangwon" onClick={onMouseHandler} x="280" y="100">
           강원
         </StyledText>
-        <StyledText x="350" y="430">
+        <StyledText id="busan" onClick={onMouseHandler} x="350" y="430">
           부산
         </StyledText>
-        <StyledText x="190" y="150">
+        <StyledText id="gyeonggi" onClick={onMouseHandler} x="190" y="150">
           경기
         </StyledText>
-        <StyledText x="150" y="110">
+        <StyledText id="seoul" onClick={onMouseHandler} x="150" y="110">
           서울
         </StyledText>
-        <StyledText x="80" y="140">
+        <StyledText id="incheon" onClick={onMouseHandler} x="80" y="140">
           인천
         </StyledText>
-        <StyledText x="220" y="210">
+        <StyledText
+          id="northChungcheong"
+          onClick={onMouseHandler}
+          x="220"
+          y="210"
+        >
           충북
         </StyledText>
-        <StyledText x="320" y="270">
+        <StyledText
+          id="northGyeongsang"
+          onClick={onMouseHandler}
+          x="320"
+          y="270"
+        >
           경북
         </StyledText>
-        <StyledText x="170" y="350">
+        <StyledText id="northJeolla" onClick={onMouseHandler} x="170" y="350">
           전북
         </StyledText>
-        <StyledText x="260" y="390">
+        <StyledText
+          id="southGyeongsang"
+          onClick={onMouseHandler}
+          x="260"
+          y="390"
+        >
           경남
         </StyledText>
-        <StyledText x="190" y="430">
+        <StyledText id="southJeolla" onClick={onMouseHandler} x="190" y="430">
           전남
         </StyledText>
-        <StyledText x="120" y="230">
+        <StyledText
+          id="southChungcheong"
+          onClick={onMouseHandler}
+          x="120"
+          y="230"
+        >
           충남
         </StyledText>
-        <StyledText x="400" y="370">
+        <StyledText id="ulsan" onClick={onMouseHandler} x="400" y="370">
           울산
         </StyledText>
-        <StyledText x="330" y="340">
+        <StyledText id="daegu" onClick={onMouseHandler} x="330" y="340">
           대구
         </StyledText>
-        <StyledText x="100" y="410">
+        <StyledText id="gwangju" onClick={onMouseHandler} x="100" y="410">
           광주
         </StyledText>
-        <StyledText x="170" y="290">
+        <StyledText id="daejeon" onClick={onMouseHandler} x="170" y="290">
           대전
         </StyledText>
-        <StyledText x="160" y="255">
+        <StyledText id="sejong" onClick={onMouseHandler} x="160" y="255">
           세종
         </StyledText>
-        <StyledText x="110" y="610">
+        <StyledText id="jeju" onClick={onMouseHandler} x="110" y="610">
           제주
         </StyledText>
       </SvgContainer>

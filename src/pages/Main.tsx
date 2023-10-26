@@ -6,7 +6,7 @@ import { regions } from "resource/region";
 import { getNationwideData, ItemsData } from "utils/getNationwideData";
 
 import { useRecoilState } from "recoil";
-import { airEnvironmentState } from "recoil/airEnvironment";
+import { RegionAverageState } from "recoil/airEnvironment";
 import LocalSection from "components/LocalSection";
 import KoreaSVG from "components/KoreaSVG";
 import DustStatistics from "components/DustStatistics";
@@ -29,12 +29,12 @@ const HomeContainer = styled.div`
 `;
 const KoreaMap = () => {
   const [environmentData, setEnvironmentData] =
-    useRecoilState<TypeEnvironment>(airEnvironmentState);
+    useRecoilState<TypeEnvironment>(RegionAverageState);
   // 전역상태 관리를 이용해서 page를 이동하고 다시 이 페이지로 돌아와도 API호출을 하지 않고 이전에 호출한 데이터를 보여준다.
 
   const [regionEnvironmentData, setRegionEnvironmentData] =
     useRecoilState(environmentState);
-  const [ModalRegion, setModalRegion] = useState("");
+  const [ModalRegion, setModalRegion] = useState("전국");
 
   useEffect(() => {
     callEnvironmentData().then((res) => {
