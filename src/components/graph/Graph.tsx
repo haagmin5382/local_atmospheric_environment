@@ -15,6 +15,7 @@ import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
 import { ItemsData } from "utils/getNationwideData";
 import styled from "@emotion/styled";
+import { RegionAverageState } from "recoil/airEnvironment";
 
 ChartJS.register(
   CategoryScale,
@@ -34,6 +35,9 @@ const GraphContainer = styled.div`
 const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   // redux api데이터
   const environmentValue = useRecoilValue(environmentState) as any;
+  console.log(environmentValue);
+  const RegionValue = useRecoilValue(RegionAverageState);
+  console.log(Object.values(RegionValue));
 
   // 그래프 그리기
   const options = {
@@ -56,27 +60,40 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   const labels = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
+  const labels2 = ModalRegion === "전국" ? Object.keys(RegionValue) : labels;
 
   const fineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj.pm10Value;
   });
+  const fineDust2 =
+    ModalRegion === "전국"
+      ? Object.values(RegionValue).map((obj: any) => {
+          return obj.pm10Value;
+        })
+      : fineDust;
 
   const ultraFineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj.pm25Value;
   });
+  const ultraFineDust2 =
+    ModalRegion === "전국"
+      ? Object.values(RegionValue).map((obj: any) => {
+          return obj.pm25Value;
+        })
+      : fineDust;
 
   const data = {
-    labels,
+    labels2,
     datasets: [
       {
         label: "미세먼지",
-        data: fineDust,
+        data: fineDust2,
         borderColor: "#F4C44E",
         backgroundColor: "#F4C44E",
       },
       {
         label: "초미세먼지",
-        data: ultraFineDust,
+        data: ultraFineDust2,
         borderColor: "#E15E29",
         backgroundColor: "#E15E29",
       },
