@@ -59,6 +59,9 @@ const KoreaMap = () => {
         setEnvironmentData((prevState) => ({ ...prevState, ...regionData })); //
       }
     });
+    return () => {
+      // console.log("clean up"); // unmount될 때 동작
+    };
   }, []);
   // console.log(Object.keys(environmentData).length);
 
