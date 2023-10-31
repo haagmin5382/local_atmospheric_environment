@@ -1,41 +1,18 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { RegionAverageState } from "recoil/airEnvironment";
+import {
+  MapContainer,
+  PathContainer,
+  SvgContainer,
+  StyledText,
+} from "styledcomponents/style_koreamap";
 import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 import Modal from "./Modal";
-const MapContainer = styled.section`
-  text-align: center;
-  margin-left: 10vw;
-`;
 
-const SvgContainer = styled.svg`
-  background-color: #add8e6;
-  border-radius: 10px;
-  padding: 1vw;
-  margin-top: 15vh;
-  height: 65vh;
-  width: 35vw;
-`;
-
-const PathContainer = styled.path`
-  stroke: #ffffff;
-
-  &:hover {
-    fill: #eeebd4;
-    cursor: pointer;
-    transition: 0.8s;
-  }
-`;
-const StyledText = styled.text`
-  cursor: pointer;
-  font-family: Arial;
-  font-weight: bold;
-  font-size: 20px;
-  stroke-width: 2;
-  text-anchor: middle;
-`;
-
-const KoreaSVG = ({ ModalRegion, setModalRegion, environmentData }: any) => {
+const KoreaSVG = ({ ModalRegion, setModalRegion }: any) => {
+  const environmentData = useRecoilValue(RegionAverageState) as any;
   const {
     강원,
     경기,
