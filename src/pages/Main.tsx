@@ -11,7 +11,7 @@ import DustStatistics from "components/DustStatistics";
 import { getRegionEnvironment } from "utils/getRegionData";
 import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
-import { HomeContainer } from "styledcomponents/style_main";
+import { HomeContainer } from "styledcomponents/main.style";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -21,7 +21,7 @@ export interface TypeEnvironment {
 }
 
 const KoreaMap = () => {
-  const [, setRegionAveragetData] =
+  const [regionAverageData, setRegionAveragetData] =
     useRecoilState<TypeEnvironment>(RegionAverageState);
   // 전역상태 관리를 이용해서 page를 이동하고 다시 이 페이지로 돌아와도 API호출을 하지 않고 이전에 호출한 데이터를 보여준다.
 
@@ -64,7 +64,11 @@ const KoreaMap = () => {
       </div>
       <div>
         <LocalSection ModalRegion={ModalRegion} />
-        <Graph ModalRegion={ModalRegion} />
+        {Object.values(regionAverageData).length ? (
+          <Graph ModalRegion={ModalRegion} />
+        ) : (
+          <></>
+        )}
       </div>
     </HomeContainer>
   );

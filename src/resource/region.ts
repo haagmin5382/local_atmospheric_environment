@@ -19,4 +19,5 @@ export const regions: regionsType = {
   southGyeongsang: "경남",
   jeju: "제주",
   sejong: "세종",
+  // korea: "전국",
 };

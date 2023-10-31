@@ -35,9 +35,7 @@ const GraphContainer = styled.div`
 const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   // redux api데이터
   const environmentValue = useRecoilValue(environmentState) as any;
-  console.log(environmentValue);
   const RegionValue = useRecoilValue(RegionAverageState);
-  console.log(Object.values(RegionValue));
 
   // 그래프 그리기
   const options = {
@@ -50,7 +48,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
         display: true,
         text: `${
           ModalRegion && environmentValue[ModalRegion]
-            ? environmentValue[ModalRegion][0].sidoName
+            ? environmentValue[ModalRegion][0]?.sidoName
             : ""
         } 지역 미세먼지 수치`,
       },
@@ -75,6 +73,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
   const ultraFineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj.pm25Value;
   });
+
   const ultraFineDust2 =
     ModalRegion === "전국"
       ? Object.values(RegionValue).map((obj: any) => {
@@ -83,17 +82,17 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
       : fineDust;
 
   const data = {
-    labels2,
+    labels,
     datasets: [
       {
         label: "미세먼지",
-        data: fineDust2,
+        data: fineDust,
         borderColor: "#F4C44E",
         backgroundColor: "#F4C44E",
       },
       {
         label: "초미세먼지",
-        data: ultraFineDust2,
+        data: ultraFineDust,
         borderColor: "#E15E29",
         backgroundColor: "#E15E29",
       },
@@ -108,15 +107,12 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
 
   return (
     <GraphContainer>
-      {ModalRegion !== "전국" ? (
-        environmentValue[ModalRegion] ? (
-          <Bar options={options} data={data} />
-        ) : (
-          <LoadingSpinner />
-        )
+      {/* {environmentValue[ModalRegion] ? (
+        <Bar options={options} data={data} />
       ) : (
-        <></>
-      )}
+        <LoadingSpinner />
+      )} */}
+      {labels2.length ? <Bar options={options} data={data} /> : <></>}
     </GraphContainer>
   );
 };
