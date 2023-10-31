@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import AlertModal from "./graph/AlertModal";
+import AlertModal from "./AlertModal";
 
 const LoadingSpinnerContainer = styled.div`
   width: 100%;

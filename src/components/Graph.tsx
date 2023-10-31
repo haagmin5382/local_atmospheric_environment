@@ -1,4 +1,4 @@
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "./LoadingSpinner";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
 import { ItemsData } from "utils/getNationwideData";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { RegionAverageState } from "recoil/airEnvironment";
 
 ChartJS.register(
