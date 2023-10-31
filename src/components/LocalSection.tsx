@@ -10,7 +10,7 @@ import {
   TextDust,
   TextParticle,
   LocalSectionConatiner,
-} from "styledcomponents/style_localsection";
+} from "styledcomponents/localsection.style";
 
 const LocalSection = ({ ModalRegion }: { ModalRegion: string }) => {
   const particleValue = useRecoilValue(RegionAverageState) as TypeEnvironment;

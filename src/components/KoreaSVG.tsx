@@ -6,7 +6,7 @@ import {
   PathContainer,
   SvgContainer,
   StyledText,
-} from "styledcomponents/style_koreamap";
+} from "styledcomponents/koreamap.style";
 import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 import Modal from "./Modal";
@@ -38,7 +38,12 @@ const KoreaSVG = ({ ModalRegion, setModalRegion }: any) => {
   const onMouseHandler = (
     e: React.MouseEvent<SVGPathElement> | React.MouseEvent<SVGElement>
   ) => {
-    putMouse(e, setModalOpen, setModalRegion);
+    const target = (e.target as Element).id;
+    if (target === "korea") {
+      setModalRegion("전국");
+    } else {
+      putMouse(e, setModalOpen, setModalRegion);
+    }
   };
   const offMouseHandler = () => {
     getOutMouse(setModalOpen);
@@ -306,6 +311,9 @@ const KoreaSVG = ({ ModalRegion, setModalRegion }: any) => {
         </StyledText>
         <StyledText id="jeju" onClick={onMouseHandler} x="110" y="610">
           제주
+        </StyledText>
+        <StyledText id="korea" onClick={onMouseHandler} x="30" y="30">
+          전국
         </StyledText>
       </SvgContainer>
     </MapContainer>
