@@ -64,11 +64,7 @@ const KoreaMap = () => {
       </div>
       <div>
         <LocalSection ModalRegion={ModalRegion} />
-        {Object.values(regionAverageData).length ? (
-          <Graph ModalRegion={ModalRegion} />
-        ) : (
-          <></>
-        )}
+        <Graph ModalRegion={ModalRegion} />
       </div>
     </HomeContainer>
   );
