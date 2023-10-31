@@ -49,50 +49,50 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
         text: `${
           ModalRegion && environmentValue[ModalRegion]
             ? environmentValue[ModalRegion][0]?.sidoName
-            : ""
-        } 지역 미세먼지 수치`,
+            : "전국"
+        } 미세먼지 수치`,
       },
     },
   };
 
-  const labels = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
+  const regions = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
-  const labels2 = ModalRegion === "전국" ? Object.keys(RegionValue) : labels;
 
-  const fineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
+  const korea = Object.keys(RegionValue);
+
+  const regionFineDust = environmentValue[ModalRegion]?.map(
+    (obj: ItemsData) => {
+      return obj.pm10Value;
+    }
+  );
+
+  const koreaFineDust = Object.values(RegionValue).map((obj: any) => {
     return obj.pm10Value;
   });
-  const fineDust2 =
-    ModalRegion === "전국"
-      ? Object.values(RegionValue).map((obj: any) => {
-          return obj.pm10Value;
-        })
-      : fineDust;
 
-  const ultraFineDust = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
+  const regionUltraFineDust = environmentValue[ModalRegion]?.map(
+    (obj: ItemsData) => {
+      return obj.pm25Value;
+    }
+  );
+
+  const koreaUltaFineDust = Object.values(RegionValue).map((obj: any) => {
     return obj.pm25Value;
   });
 
-  const ultraFineDust2 =
-    ModalRegion === "전국"
-      ? Object.values(RegionValue).map((obj: any) => {
-          return obj.pm25Value;
-        })
-      : fineDust;
-
   const data = {
-    labels,
+    labels: ModalRegion === "전국" ? korea : regions,
     datasets: [
       {
         label: "미세먼지",
-        data: fineDust,
+        data: ModalRegion === "전국" ? koreaFineDust : regionFineDust,
         borderColor: "#F4C44E",
         backgroundColor: "#F4C44E",
       },
       {
         label: "초미세먼지",
-        data: ultraFineDust,
+        data: ModalRegion === "전국" ? koreaUltaFineDust : regionUltraFineDust,
         borderColor: "#E15E29",
         backgroundColor: "#E15E29",
       },
@@ -112,7 +112,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
       ) : (
         <LoadingSpinner />
       )} */}
-      {labels2.length ? <Bar options={options} data={data} /> : <></>}
+      {korea.length ? <Bar options={options} data={data} /> : <></>}
     </GraphContainer>
   );
 };
