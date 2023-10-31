@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { environmentState } from "recoil/environment";
 import { ItemsData } from "utils/getNationwideData";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 ChartJS.register(
   CategoryScale,
