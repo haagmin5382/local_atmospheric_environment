@@ -41,7 +41,7 @@ const LoadingMessage = styled.h2`
   color: #505649;
 `;
 
-const LoadingTime = styled.h2`
+const LoadingTime = styled.h4`
   position: absolute;
   top: 70%;
   left: 47vw;

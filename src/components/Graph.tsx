@@ -1,4 +1,3 @@
-import LoadingSpinner from "./LoadingSpinner";
 import {
   Chart as ChartJS,
   CategoryScale,

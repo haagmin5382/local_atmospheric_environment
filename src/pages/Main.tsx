@@ -12,6 +12,7 @@ import { getRegionEnvironment } from "utils/getRegionData";
 import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
+import LoadingSpinner from "components/LoadingSpinner";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -55,7 +56,9 @@ const KoreaMap = () => {
       // console.log("clean up"); // unmount될 때 동작
     };
   }, []);
-
+  if (Object.keys(regionAverageData).length === 0) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
   return (
     <HomeContainer>
       <div>
