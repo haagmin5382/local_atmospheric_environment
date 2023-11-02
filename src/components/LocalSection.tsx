@@ -25,7 +25,7 @@ const LocalSection = () => {
   const textMicroDust =
     regionValue === "전국"
       ? "전국 미세먼지 평균 " + koreaValue?.pm25Value
-      : "미세먼지 " + particleValue[regionValue]?.pm25Value;
+      : "초미세먼지 " + particleValue[regionValue]?.pm25Value;
 
   return (
     <LocalSectionConatiner regionValue={regionValue}>

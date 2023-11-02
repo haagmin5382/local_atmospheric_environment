@@ -1,48 +1,69 @@
-import React, { useState } from "react";
+import { TypeEnvironment } from "pages/Main";
+import React from "react";
+import { useRecoilValue } from "recoil";
+import {
+  KoreaAverageSelector,
+  RegionAverageState,
+} from "recoil/airEnvironment";
+import { regionState } from "recoil/region";
 import styled from "styled-components";
-
-const HeaderContainer = styled.header`
+import { getParticleColor } from "utils/getParticleColor";
+interface HeaderContainerProps {
+  BgColor: string;
+}
+const HeaderContainer = styled.header<HeaderContainerProps>`
   background: linear-gradient(
     to bottom,
-    rgba(52, 152, 219, 1),
+    ${(props) => props.BgColor || "rgba(52, 152, 219, 1)"},
     rgba(52, 152, 219, 0)
   );
-  color: #fff;
-  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 12vh;
-  z-index: 1;
-  transition: background 0.3s;
-`;
 
-const HeaderContent = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 8vh;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+`;
+
+const Logo = styled.h1`
+  font-size: 24px;
   transition: transform 0.3s;
+  cursor: pointer;
+`;
+const DustInfo = styled.div`
+  align-items: center;
+  font-size: 16px;
+  margin-right: 5vw;
+  color: black;
 `;
 
 function Header() {
-  const [isHovered, setIsHovered] = useState(false);
+  const regionValue = useRecoilValue(regionState);
+  const particleValue = useRecoilValue(RegionAverageState) as TypeEnvironment;
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+  const koreaValue = useRecoilValue(KoreaAverageSelector);
+  const textFineDust =
+    regionValue === "전국"
+      ? "전국 미세먼지 평균 " + koreaValue?.pm10Value
+      : "미세먼지 " + particleValue[regionValue]?.pm10Value;
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
+  const textMicroDust =
+    regionValue === "전국"
+      ? "전국 미세먼지 평균 " + koreaValue?.pm25Value
+      : "초미세먼지 " + particleValue[regionValue]?.pm25Value;
+  const BgColor = getParticleColor(particleValue[regionValue]) as string;
   return (
-    <HeaderContainer>
-      <HeaderContent
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      ></HeaderContent>
+    <HeaderContainer BgColor={BgColor}>
+      <Logo>{regionValue}</Logo>
+      <DustInfo>
+        {textFineDust} µg/m³
+        <br />
+        <br />
+        {textMicroDust}µg/m³
+      </DustInfo>
     </HeaderContainer>
   );
 }
