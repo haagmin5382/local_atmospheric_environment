@@ -25,8 +25,7 @@ export const PathContainer = styled.path`
 `;
 export const StyledText = styled.text`
   cursor: pointer;
-  font-family: Arial;
-  font-weight: bold;
+  font-family: JeonjuCraftGoR;
   font-size: 20px;
   stroke-width: 2;
   text-anchor: middle;

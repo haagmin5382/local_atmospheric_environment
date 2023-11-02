@@ -13,6 +13,7 @@ import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
 import LoadingSpinner from "components/LoadingSpinner";
+import { regionState } from "recoil/region";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -27,7 +28,6 @@ const KoreaMap = () => {
   // 전역상태 관리를 이용해서 page를 이동하고 다시 이 페이지로 돌아와도 API호출을 하지 않고 이전에 호출한 데이터를 보여준다.
 
   const [, setRegionEnvironmentData] = useRecoilState(environmentState);
-  const [ModalRegion, setModalRegion] = useState("전국");
 
   useEffect(() => {
     callEnvironmentData().then((res) => {
@@ -62,12 +62,12 @@ const KoreaMap = () => {
   return (
     <HomeContainer>
       <div>
-        <KoreaSVG ModalRegion={ModalRegion} setModalRegion={setModalRegion} />
+        <KoreaSVG />
         <DustStatistics />
       </div>
       <div>
-        <LocalSection ModalRegion={ModalRegion} />
-        <Graph ModalRegion={ModalRegion} />
+        <LocalSection />
+        <Graph />
       </div>
     </HomeContainer>
   );

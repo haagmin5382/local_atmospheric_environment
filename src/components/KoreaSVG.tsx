@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
+import { regionState } from "recoil/region";
 import {
   MapContainer,
   PathContainer,
@@ -11,8 +12,10 @@ import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 import Modal from "./Modal";
 
-const KoreaSVG = ({ ModalRegion, setModalRegion }: any) => {
+const KoreaSVG = () => {
   const environmentData = useRecoilValue(RegionAverageState) as any;
+  const [ModalRegion, setModalRegion] = useRecoilState(regionState);
+
   const {
     강원,
     경기,

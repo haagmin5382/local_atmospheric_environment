@@ -9,8 +9,8 @@ to {
 `;
 
 export const LocalSectionConatiner = styled.div`
-  background-image: ${(props: { ModalRegion: string }) =>
-    `url(/img/regionImg/${props.ModalRegion}.jpg)`}; // 동적 이미지 경로
+  background-image: ${(props: { regionValue: string }) =>
+    `url(/img/regionImg/${props.regionValue}.jpg)`}; // 동적 이미지 경로
   position: relative;
 
   background-repeat: no-repeat;
