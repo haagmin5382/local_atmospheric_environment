@@ -15,6 +15,7 @@ import { environmentState } from "recoil/environment";
 import { ItemsData } from "utils/getNationwideData";
 import styled from "styled-components";
 import { RegionAverageState } from "recoil/airEnvironment";
+import { regionState } from "recoil/region";
 
 ChartJS.register(
   CategoryScale,
@@ -31,10 +32,11 @@ const GraphContainer = styled.div`
   height: 25vh;
 `;
 
-const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
+const Graph = () => {
   // redux api데이터
+  const regionValue = useRecoilValue(regionState);
   const environmentValue = useRecoilValue(environmentState) as any;
-  const RegionValue = useRecoilValue(RegionAverageState);
+  const regionAverageValue = useRecoilValue(RegionAverageState);
 
   // 그래프 그리기
   const options = {
@@ -46,52 +48,54 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
       title: {
         display: true,
         text: `${
-          ModalRegion && environmentValue[ModalRegion]
-            ? environmentValue[ModalRegion][0]?.sidoName
+          regionValue && environmentValue[regionValue]
+            ? environmentValue[regionValue][0]?.sidoName
             : "전국"
         } 미세먼지 수치`,
       },
     },
   };
 
-  const regions = environmentValue[ModalRegion]?.map((obj: ItemsData) => {
+  const regions = environmentValue[regionValue]?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
 
-  const korea = Object.keys(RegionValue);
+  const korea = Object.keys(regionAverageValue);
 
-  const regionFineDust = environmentValue[ModalRegion]?.map(
+  const regionFineDust = environmentValue[regionValue]?.map(
     (obj: ItemsData) => {
       return obj.pm10Value;
     }
   );
 
-  const koreaFineDust = Object.values(RegionValue).map((obj: any) => {
+  const koreaFineDust = Object.values(regionAverageValue).map((obj: any) => {
     return obj.pm10Value;
   });
 
-  const regionUltraFineDust = environmentValue[ModalRegion]?.map(
+  const regionUltraFineDust = environmentValue[regionValue]?.map(
     (obj: ItemsData) => {
       return obj.pm25Value;
     }
   );
 
-  const koreaUltaFineDust = Object.values(RegionValue).map((obj: any) => {
-    return obj.pm25Value;
-  });
+  const koreaUltaFineDust = Object.values(regionAverageValue).map(
+    (obj: any) => {
+      return obj.pm25Value;
+    }
+  );
 
   const data = {
-    labels: ModalRegion === "전국" ? korea : regions,
+    labels: regionValue === "전국" ? korea : regions,
     datasets: [
       {
         label: "미세먼지",
-        data: ModalRegion === "전국" ? koreaFineDust : regionFineDust,
+        data: regionValue === "전국" ? koreaFineDust : regionFineDust,
         borderColor: "#F4C44E",
         backgroundColor: "#F4C44E",
       },
       {
         label: "초미세먼지",
-        data: ModalRegion === "전국" ? koreaUltaFineDust : regionUltraFineDust,
+        data: regionValue === "전국" ? koreaUltaFineDust : regionUltraFineDust,
         borderColor: "#E15E29",
         backgroundColor: "#E15E29",
       },
@@ -106,7 +110,7 @@ const Graph = ({ ModalRegion }: { ModalRegion: string }) => {
 
   return (
     <GraphContainer>
-      {/* {environmentValue[ModalRegion] ? (
+      {/* {environmentValue[regionValue] ? (
         <Bar options={options} data={data} />
       ) : (
         <LoadingSpinner />

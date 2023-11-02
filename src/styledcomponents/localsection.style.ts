@@ -9,8 +9,10 @@ to {
 `;
 
 export const LocalSectionConatiner = styled.div`
-  background-image: ${(props: { ModalRegion: string }) =>
-    `url(/img/regionImg/${props.ModalRegion}.jpg)`}; // 동적 이미지 경로
+  background-image: ${(props: { regionValue: string }) =>
+    `url(/img/regionImg/${props.regionValue}.jpg)`};
+  /* background-image: ${(props: { regionValue: string }) =>
+    `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url(/img/regionImg/${props.regionValue}.jpg)`}; */
   position: relative;
 
   background-repeat: no-repeat;
@@ -38,7 +40,7 @@ export const TextDust = styled.div`
   position: absolute; //절대 위치
   bottom: 4vh;
   left: 1vw;
-  color: white; /* 텍스트 색상 */
+  color: white; //텍스트 색상
   font-size: 15px; /* 원하는 글꼴 크기 및 스타일 */
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
