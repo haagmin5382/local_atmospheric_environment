@@ -3,7 +3,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
 import { regionState } from "recoil/region";
 import { mapPath } from "resource/pathmap";
-import { regions } from "resource/region";
 import { PathContainer } from "styledcomponents/koreamap.style";
 import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
@@ -47,8 +46,6 @@ const SvgPath = () => {
     const pathComponent = [];
     for (const [key, value] of Object.entries(environmentData)) {
       const ParticleAmount = value as any;
-      const keyOfRegion = Object.keys(regions);
-      const Resourcekey = keyOfRegion.find((region) => regions[region] === key);
 
       pathComponent.push(
         <PathContainer
@@ -57,8 +54,8 @@ const SvgPath = () => {
           onMouseOut={offMouseHandler}
           onMouseMove={moveMouse}
           fill={getParticleColor(ParticleAmount)}
-          id={Resourcekey}
-          name={Resourcekey}
+          id={key}
+          name={key}
           d={mapPath[key]}
         />
       );

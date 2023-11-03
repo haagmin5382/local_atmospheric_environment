@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
 import { callEnvironmentData } from "utils/api";
 import { regions } from "resource/region";
 import { getNationwideData, ItemsData } from "utils/getNationwideData";
@@ -13,7 +12,6 @@ import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
 import LoadingSpinner from "components/LoadingSpinner";
-import { regionState } from "recoil/region";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -40,15 +38,15 @@ const KoreaMap = () => {
           obj.pm25Value !== null
         );
       });
-      for (const city in regions) {
-        const regionData = getRegionEnvironment(filteredData, regions[city]);
+      for (const city of regions) {
+        const regionData = getRegionEnvironment(filteredData, city);
         setRegionEnvironmentData((prevState) => ({
           ...prevState,
           ...regionData,
         }));
       }
-      for (const city in regions) {
-        const regionData = getNationwideData(filteredData, regions[city]);
+      for (const city of regions) {
+        const regionData = getNationwideData(filteredData, city);
         setRegionAveragetData((prevState) => ({ ...prevState, ...regionData }));
       }
     });
