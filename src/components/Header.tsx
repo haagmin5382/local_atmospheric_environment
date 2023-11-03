@@ -6,39 +6,8 @@ import {
   RegionAverageState,
 } from "recoil/airEnvironment";
 import { regionState } from "recoil/region";
-import styled from "styled-components";
+import { DustInfo, HeaderContainer, Logo } from "styledcomponents/header.style";
 import { getParticleColor } from "utils/getParticleColor";
-interface HeaderContainerProps {
-  BgColor: string;
-}
-const HeaderContainer = styled.header<HeaderContainerProps>`
-  background: linear-gradient(
-    to bottom,
-    ${(props) => props.BgColor},
-    rgba(52, 152, 219, 0)
-  );
-
-  position: fixed;
-  width: 100%;
-  height: 8vh;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-`;
-
-const Logo = styled.h1`
-  font-size: 24px;
-  transition: transform 0.3s;
-  cursor: pointer;
-`;
-const DustInfo = styled.div`
-  align-items: center;
-  font-size: 16px;
-  margin-right: 5vw;
-  color: black;
-`;
 
 function Header() {
   const regionValue = useRecoilValue(regionState);
@@ -54,9 +23,11 @@ function Header() {
     regionValue === "전국"
       ? "전국 미세먼지 평균 " + koreaValue?.pm25Value
       : "초미세먼지 " + particleValue[regionValue]?.pm25Value;
-  const BgColor = getParticleColor(particleValue[regionValue]) as string;
+  const koreaBgColor = getParticleColor(koreaValue) as string;
+  const regionBgColor = getParticleColor(particleValue[regionValue]) as string;
+  const bgColor = regionValue === "전국" ? koreaBgColor : regionBgColor;
   return (
-    <HeaderContainer BgColor={BgColor}>
+    <HeaderContainer BgColor={bgColor}>
       <Logo>{regionValue}</Logo>
       <DustInfo>
         {textFineDust} µg/m³

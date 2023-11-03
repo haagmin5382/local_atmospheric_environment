@@ -6,12 +6,12 @@ import { useRecoilState } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
 import LocalSection from "components/LocalSection";
 import KoreaSVG from "components/map/KoreaSVG";
-import DustStatistics from "components/DustStatistics";
+import DustStatistics from "components/map/DustStatistics";
 import { getRegionEnvironment } from "utils/getRegionData";
 import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
-import LoadingSpinner from "components/LoadingSpinner";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 
 export interface TypeEnvironment {
   [region: string]: {
