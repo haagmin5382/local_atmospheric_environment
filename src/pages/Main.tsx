@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
 import { callEnvironmentData } from "utils/api";
 import { regions } from "resource/region";
 import { getNationwideData, ItemsData } from "utils/getNationwideData";
 import { useRecoilState } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
 import LocalSection from "components/LocalSection";
-import KoreaSVG from "components/KoreaSVG";
+import KoreaSVG from "components/map/KoreaSVG";
 import DustStatistics from "components/DustStatistics";
 import { getRegionEnvironment } from "utils/getRegionData";
 import { environmentState } from "recoil/environment";
 import Graph from "components/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
 import LoadingSpinner from "components/LoadingSpinner";
-import { regionState } from "recoil/region";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -40,15 +38,15 @@ const KoreaMap = () => {
           obj.pm25Value !== null
         );
       });
-      for (const city in regions) {
-        const regionData = getRegionEnvironment(filteredData, regions[city]);
+      for (const city of regions) {
+        const regionData = getRegionEnvironment(filteredData, city);
         setRegionEnvironmentData((prevState) => ({
           ...prevState,
           ...regionData,
         }));
       }
-      for (const city in regions) {
-        const regionData = getNationwideData(filteredData, regions[city]);
+      for (const city of regions) {
+        const regionData = getNationwideData(filteredData, city);
         setRegionAveragetData((prevState) => ({ ...prevState, ...regionData }));
       }
     });

@@ -14,7 +14,7 @@ interface HeaderContainerProps {
 const HeaderContainer = styled.header<HeaderContainerProps>`
   background: linear-gradient(
     to bottom,
-    ${(props) => props.BgColor || "rgba(52, 152, 219, 1)"},
+    ${(props) => props.BgColor},
     rgba(52, 152, 219, 0)
   );
 
