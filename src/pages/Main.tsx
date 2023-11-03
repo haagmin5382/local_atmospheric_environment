@@ -6,7 +6,7 @@ import { getNationwideData, ItemsData } from "utils/getNationwideData";
 import { useRecoilState } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
 import LocalSection from "components/LocalSection";
-import KoreaSVG from "components/KoreaSVG";
+import KoreaSVG from "components/map/KoreaSVG";
 import DustStatistics from "components/DustStatistics";
 import { getRegionEnvironment } from "utils/getRegionData";
 import { environmentState } from "recoil/environment";
