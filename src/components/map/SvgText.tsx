@@ -1,5 +1,7 @@
+import { TypeEnvironment } from "pages/Main";
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { RegionAverageState } from "recoil/airEnvironment";
 import { regionState } from "recoil/region";
 import { mapText } from "resource/pathmap";
 import { StyledText } from "styledcomponents/koreamap.style";
@@ -8,6 +10,7 @@ import { putMouse } from "utils/mouseEvent";
 const SvgText = () => {
   const [ModalRegion, setModalRegion] = useRecoilState(regionState);
   const [isModalOpened, setModalOpen] = useState(false);
+  const regionDustValue = useRecoilValue(RegionAverageState) as TypeEnvironment;
 
   const onMouseHandler = (
     e: React.MouseEvent<SVGPathElement> | React.MouseEvent<SVGElement>
@@ -19,19 +22,31 @@ const SvgText = () => {
       putMouse(e, setModalOpen, setModalRegion);
     }
   };
+
   const renderingPath = () => {
     const textComponent = [];
     for (const [key, value] of Object.entries(mapText)) {
       textComponent.push(
-        <StyledText
-          key={key}
-          id={key}
-          x={value.x}
-          y={value.y}
-          onClick={onMouseHandler}
-        >
-          {key}
-        </StyledText>
+        <>
+          <StyledText
+            key={key}
+            id={key}
+            x={value.x}
+            y={value.y}
+            onClick={onMouseHandler}
+          >
+            {key}
+          </StyledText>
+          <StyledText
+            key={key}
+            id={key}
+            x={value.x}
+            y={`${Number(value.y) + 21}`}
+            onClick={onMouseHandler}
+          >
+            {regionDustValue[key]?.pm10Value}
+          </StyledText>
+        </>
       );
     }
     return textComponent;

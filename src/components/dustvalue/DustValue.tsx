@@ -6,7 +6,6 @@ import {
   RegionAverageState,
 } from "recoil/airEnvironment";
 import { regionState } from "recoil/region";
-import { TextDust, TextParticle } from "styledcomponents/localsection.style";
 
 const DustValue = ({ dustKind }: { dustKind: string }) => {
   const koreaDustValue = useRecoilValue(KoreaAverageSelector);
