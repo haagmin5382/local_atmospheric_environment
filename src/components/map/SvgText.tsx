@@ -27,18 +27,11 @@ const SvgText = () => {
     const textComponent = [];
     for (const [key, value] of Object.entries(mapText)) {
       textComponent.push(
-        <>
-          <StyledText
-            key={key}
-            id={key}
-            x={value.x}
-            y={value.y}
-            onClick={onMouseHandler}
-          >
+        <React.Fragment key={key}>
+          <StyledText id={key} x={value.x} y={value.y} onClick={onMouseHandler}>
             {key}
           </StyledText>
           <StyledText
-            key={key}
             id={key}
             x={value.x}
             y={`${Number(value.y) + 21}`}
@@ -46,7 +39,7 @@ const SvgText = () => {
           >
             {regionDustValue[key]?.pm10Value}
           </StyledText>
-        </>
+        </React.Fragment>
       );
     }
     return textComponent;
