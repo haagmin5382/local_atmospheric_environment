@@ -37,7 +37,6 @@ const Graph = () => {
   const regionValue = useRecoilValue(regionState);
   const environmentValue = useRecoilValue(environmentState) as any;
   const regionAverageValue = useRecoilValue(RegionAverageState);
-
   // 그래프 그리기
   const options = {
     responsive: true,
@@ -59,25 +58,20 @@ const Graph = () => {
   const regions = environmentValue[regionValue]?.map((obj: ItemsData) => {
     return obj?.stationName;
   });
-
-  const korea = Object.keys(regionAverageValue);
-
   const regionFineDust = environmentValue[regionValue]?.map(
     (obj: ItemsData) => {
       return obj.pm10Value;
     }
   );
-
-  const koreaFineDust = Object.values(regionAverageValue).map((obj: any) => {
-    return obj.pm10Value;
-  });
-
   const regionUltraFineDust = environmentValue[regionValue]?.map(
     (obj: ItemsData) => {
       return obj.pm25Value;
     }
   );
-
+  const korea = Object.keys(regionAverageValue);
+  const koreaFineDust = Object.values(regionAverageValue).map((obj: any) => {
+    return obj.pm10Value;
+  });
   const koreaUltaFineDust = Object.values(regionAverageValue).map(
     (obj: any) => {
       return obj.pm25Value;
@@ -110,11 +104,6 @@ const Graph = () => {
 
   return (
     <GraphContainer>
-      {/* {environmentValue[regionValue] ? (
-        <Bar options={options} data={data} />
-      ) : (
-        <LoadingSpinner />
-      )} */}
       {korea.length ? <Bar options={options} data={data} /> : <></>}
     </GraphContainer>
   );
