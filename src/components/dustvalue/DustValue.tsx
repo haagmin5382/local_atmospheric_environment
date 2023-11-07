@@ -19,7 +19,7 @@ const DustValue = ({ dustKind }: { dustKind: string }) => {
 
   const textMicroDust =
     regionValue === "전국"
-      ? "전국 미세먼지 평균 " + koreaDustValue?.pm25Value
+      ? "전국 초미세먼지 평균 " + koreaDustValue?.pm25Value
       : "초미세먼지 " + regionDustValue[regionValue]?.pm25Value;
 
   if (dustKind === "미세먼지") {
