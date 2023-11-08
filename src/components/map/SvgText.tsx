@@ -30,14 +30,10 @@ const SvgText = () => {
         <React.Fragment key={key}>
           <StyledText id={key} x={value.x} y={value.y} onClick={onMouseHandler}>
             {key}
-          </StyledText>
-          <StyledText
-            id={key}
-            x={value.x}
-            y={`${Number(value.y) + 21}`}
-            onClick={onMouseHandler}
-          >
-            {regionDustValue[key]?.pm10Value}
+            <tspan id={key} x={value.x} y={`${Number(value.y) + 21}`}>
+              {" "}
+              {regionDustValue[key]?.pm10Value}
+            </tspan>
           </StyledText>
         </React.Fragment>
       );

@@ -36,15 +36,17 @@ const Spinner = styled.div`
 
 const LoadingMessage = styled.h2`
   position: absolute;
-  top: 60%;
-  left: 44vw;
+  top: 60%; // 화면 상단에서 50% 위치로 이동
+  left: 50%; // 화면 왼쪽에서 50% 위치로 이동
+  transform: translate(-50%, -50%); // 수평 및 수직 정중앙으로 이동
   color: #505649;
 `;
 
 const LoadingTime = styled.h4`
   position: absolute;
-  top: 70%;
-  left: 47vw;
+  top: 70%; // 화면 상단에서 50% 위치로 이동
+  left: 50%; // 화면 왼쪽에서 50% 위치로 이동
+  transform: translate(-50%, -50%); // 수평 및 수직 정중앙으로 이동
   color: #505649;
 `;
 
@@ -71,7 +73,7 @@ const LoadingSpinner = () => {
     <LoadingSpinnerContainer>
       {modalOpened ? <AlertModal /> : null}
       <Spinner></Spinner>
-      <LoadingMessage>데이터를 불러오는 중...</LoadingMessage>
+      <LoadingMessage>데이터 불러오는 중</LoadingMessage>
       <LoadingTime> 대기 시간 : {waitingTime}초</LoadingTime>
     </LoadingSpinnerContainer>
   );

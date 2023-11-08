@@ -1,5 +1,5 @@
 import React from "react";
-import { MapContainer, SvgContainer } from "styledcomponents/koreamap.style";
+import { SvgContainer } from "styledcomponents/koreamap.style";
 import SvgPath from "./SvgPath";
 import SvgText from "./SvgText";
 

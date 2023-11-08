@@ -30,11 +30,13 @@ ChartJS.register(
 const GraphContainer = styled.div`
   @media (max-width: 800px) {
     margin-top: 5vh;
-    width: 100vw;
+    margin-left: 3vw;
+    width: 90vw;
     height: 60vh;
   }
 
   width: 36vw;
+
   /* height: 25vh; */
 `;
 
