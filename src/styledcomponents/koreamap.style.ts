@@ -2,16 +2,19 @@ import styled from "styled-components";
 
 export const MapContainer = styled.section`
   text-align: center;
-  margin-left: 10vw;
+  /* margin-left: 10vw; */
 `;
 
 export const SvgContainer = styled.svg`
   background-color: #add8e6;
   border-radius: 10px;
-  padding: 1vw;
+  padding: 2vw;
   margin-top: 15vh;
-  height: 65vh;
-  width: 35vw;
+  width: 90vw;
+  @media (min-width: 800px) {
+    width: 35vw;
+    height: 65vh;
+  }
 `;
 
 export const PathContainer = styled.path`

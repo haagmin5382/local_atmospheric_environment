@@ -12,6 +12,8 @@ import { environmentState } from "recoil/environment";
 import Graph from "components/graph/Graph";
 import { HomeContainer } from "styledcomponents/main.style";
 import LoadingSpinner from "components/loading/LoadingSpinner";
+import { MapContainer } from "styledcomponents/koreamap.style";
+import { LocalContainer } from "styledcomponents/localsection.style";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -59,14 +61,14 @@ const KoreaMap = () => {
   }
   return (
     <HomeContainer>
-      <div>
+      <MapContainer>
         <KoreaSVG />
         <DustStatistics />
-      </div>
-      <div>
+      </MapContainer>
+      <LocalContainer>
         <LocalSection />
         <Graph />
-      </div>
+      </LocalContainer>
     </HomeContainer>
   );
 };

@@ -5,12 +5,10 @@ import SvgText from "./SvgText";
 
 const KoreaSVG = () => {
   return (
-    <MapContainer>
-      <SvgContainer xmlns="img/south-korea.svg" viewBox="0 0 524 631">
-        <SvgPath />
-        <SvgText />
-      </SvgContainer>
-    </MapContainer>
+    <SvgContainer xmlns="img/south-korea.svg" viewBox="0 0 524 631">
+      <SvgPath />
+      <SvgText />
+    </SvgContainer>
   );
 };
 

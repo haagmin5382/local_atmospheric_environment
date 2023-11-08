@@ -3,17 +3,19 @@ import styled from "styled-components";
 
 const LineContainer = styled.div`
   display: flex;
-  margin-left: 13vw;
+  margin-left: 5vw;
 `;
 const HorizontalLine = styled.div`
-  width: 7.5vw;
-  height: 2px;
+  @media (min-width: 800px) {
+    width: 7.5vw;
+  }
 
+  width: 20vw;
+  height: 2px;
   background-color: ${(props: { bgColor: string }) => props.bgColor};
   color: ${(props: { bgColor: string }) => props.bgColor};
   text-align: center;
   margin: 5px;
-  display: inline-block; // 가로로 나란히 표시
 `;
 
 const DustStatistics = () => {
