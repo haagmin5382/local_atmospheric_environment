@@ -4,7 +4,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { RegionAverageState } from "recoil/airEnvironment";
 import { regionState } from "recoil/region";
 import { mapText } from "resource/pathmap";
-import { StyledText } from "styledcomponents/koreamap.style";
+import {
+  StyledRect,
+  StyledText,
+  StyledTspan,
+} from "styledcomponents/koreamap.style";
 import { putMouse } from "utils/mouseEvent";
 
 const SvgText = () => {
@@ -28,12 +32,28 @@ const SvgText = () => {
     for (const [key, value] of Object.entries(mapText)) {
       textComponent.push(
         <React.Fragment key={key}>
+          {key !== "전국" ? (
+            <StyledRect
+              x={`${Number(value.x) - 16}`}
+              y={`${Number(value.y) + 10}`}
+              id={key}
+              onClick={onMouseHandler}
+              width="32"
+              height="30"
+              fill="#e5e5e584"
+              stroke="black"
+              stroke-width="1"
+              rx="10"
+              ry="10"
+            />
+          ) : (
+            <></>
+          )}
           <StyledText id={key} x={value.x} y={value.y} onClick={onMouseHandler}>
             {key}
-            <tspan id={key} x={value.x} y={`${Number(value.y) + 21}`}>
-              {" "}
+            <StyledTspan id={key} x={value.x} y={`${Number(value.y) + 31}`}>
               {regionDustValue[key]?.pm10Value}
-            </tspan>
+            </StyledTspan>
           </StyledText>
         </React.Fragment>
       );
