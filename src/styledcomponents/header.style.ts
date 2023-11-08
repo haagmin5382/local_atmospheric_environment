@@ -17,7 +17,10 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px;
+  @media (min-width: 800px) {
+    padding: 10px 20px;
+  }
 `;
 
 export const Logo = styled.h1`
@@ -26,6 +29,10 @@ export const Logo = styled.h1`
   cursor: pointer;
 `;
 export const DustInfo = styled.div`
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
+
   align-items: center;
   font-size: 16px;
   margin-right: 5vw;
