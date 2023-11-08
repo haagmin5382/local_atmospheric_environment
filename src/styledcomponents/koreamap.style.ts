@@ -26,10 +26,16 @@ export const PathContainer = styled.path`
     transition: 0.8s;
   }
 `;
+
 export const StyledText = styled.text`
   cursor: pointer;
   font-family: JeonjuCraftGoR;
-  font-size: 20px;
+  font-size: 15px;
   stroke-width: 2;
   text-anchor: middle;
+  &:hover {
+    fill: #eeebd4;
+    cursor: pointer;
+    transition: 0.8s;
+  }
 `;
