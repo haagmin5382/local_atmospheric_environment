@@ -11,7 +11,7 @@ import {
 } from "styledcomponents/koreamap.style";
 import { putMouse } from "utils/mouseEvent";
 
-const SvgText = () => {
+const SvgText = ({ regionName }: { regionName: string }) => {
   const [ModalRegion, setModalRegion] = useRecoilState(regionState);
   const [isModalOpened, setModalOpen] = useState(false);
   const regionDustValue = useRecoilValue(RegionAverageState) as TypeEnvironment;
@@ -49,7 +49,13 @@ const SvgText = () => {
           ) : (
             <></>
           )}
-          <StyledText id={key} x={value.x} y={value.y} onClick={onMouseHandler}>
+          <StyledText
+            isSelected={regionName === key}
+            id={key}
+            x={value.x}
+            y={value.y}
+            onClick={onMouseHandler}
+          >
             {key}
             <StyledTspan id={key} x={value.x} y={`${Number(value.y) + 31}`}>
               {regionDustValue[key]?.pm10Value}

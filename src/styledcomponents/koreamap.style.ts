@@ -21,7 +21,6 @@ export const PathContainer = styled.path`
   stroke: #ffffff;
 
   &:hover {
-    fill: #eeebd4;
     cursor: pointer;
     transition: 0.8s;
   }
@@ -32,11 +31,14 @@ export const StyledRect = styled.rect`
 
 export const StyledText = styled.text`
   cursor: pointer;
-  fill: black;
+  fill: ${(props: { isSelected: boolean }) =>
+    props.isSelected ? `white` : "black"};
   font-family: JeonjuCraftGoR;
+  font-weight: 900;
   font-size: 17px;
   stroke-width: 2;
   text-anchor: middle;
+  transition: 0.8s;
   &:hover {
     fill: #eeebd4;
     cursor: pointer;

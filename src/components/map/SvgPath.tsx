@@ -7,7 +7,11 @@ import { PathContainer } from "styledcomponents/koreamap.style";
 import { getParticleColor } from "utils/getParticleColor";
 import { getOutMouse, putMouse } from "utils/mouseEvent";
 
-const SvgPath = () => {
+const SvgPath = ({
+  setRegionName,
+}: {
+  setRegionName: (state: string) => void;
+}) => {
   const [ModalRegion, setModalRegion] = useRecoilState(regionState);
   const [isModalOpened, setModalOpen] = useState(false);
   const environmentData = useRecoilValue(RegionAverageState) as any;
@@ -23,13 +27,14 @@ const SvgPath = () => {
     }
   };
   const offMouseHandler = () => {
-    getOutMouse(setModalOpen);
+    setRegionName("");
+    // getOutMouse(setModalOpen);
   };
   // 마우스 움직임 이벤트
   const [throttle, setThrottle] = useState(false);
   const [mouseLocation, setMouseLocation] = useState([0, 0]);
 
-  const moveMouse = (e: React.MouseEvent<SVGPathElement>) => {
+  const moveMouse = (region: string) => {
     if (throttle) {
       return; // throttle이 true면 함수 종료
     } else {
@@ -37,11 +42,12 @@ const SvgPath = () => {
       setThrottle(true); // throttle을 true로 바꾼다.
       setTimeout(async () => {
         // 3초 뒤에
-        setMouseLocation([e.pageX, e.pageY]);
+
         setThrottle(false); // throttle을 false로 바꾼다.
       }, 200);
     }
   };
+
   const renderingPath = () => {
     const pathComponent = [];
     for (const [key, value] of Object.entries(environmentData)) {
@@ -52,7 +58,7 @@ const SvgPath = () => {
           key={mapPath[key]}
           onClick={onMouseHandler}
           onMouseOut={offMouseHandler}
-          onMouseMove={moveMouse}
+          onMouseMove={() => setRegionName(key)}
           fill={getParticleColor(ParticleAmount)}
           id={key}
           name={key}
