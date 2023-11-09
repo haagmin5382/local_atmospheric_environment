@@ -14,6 +14,8 @@ import { HomeContainer } from "styledcomponents/main.style";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import { MapContainer } from "styledcomponents/koreamap.style";
 import { LocalContainer } from "styledcomponents/localsection.style";
+import { filterErrorData } from "utils/filterData";
+import { setAPIData } from "utils/setData";
 
 export interface TypeEnvironment {
   [region: string]: {
@@ -32,25 +34,9 @@ const KoreaMap = () => {
   useEffect(() => {
     callEnvironmentData().then((res) => {
       const dataObjArray = res?.data?.response?.body?.items;
-      const filteredData = dataObjArray?.filter((obj: ItemsData) => {
-        return (
-          obj.pm10Value !== "-" &&
-          obj.pm25Value !== "-" &&
-          obj.pm10Value !== null &&
-          obj.pm25Value !== null
-        );
-      });
-      for (const city of regions) {
-        const regionData = getRegionEnvironment(filteredData, city);
-        setRegionEnvironmentData((prevState) => ({
-          ...prevState,
-          ...regionData,
-        }));
-      }
-      for (const city of regions) {
-        const regionData = getNationwideData(filteredData, city);
-        setRegionAveragetData((prevState) => ({ ...prevState, ...regionData }));
-      }
+      const filteredData = filterErrorData(dataObjArray);
+      setAPIData(getRegionEnvironment, filteredData, setRegionEnvironmentData);
+      setAPIData(getNationwideData, filteredData, setRegionAveragetData);
     });
     return () => {
       // console.log("clean up"); // unmount될 때 동작
